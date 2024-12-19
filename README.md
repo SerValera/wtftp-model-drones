@@ -12,8 +12,9 @@ This project is based on the paper "Flight trajectory prediction enabled by time
 - **Valerii Serpiva**  
   System Engineering PhD, Skoltech  
   Email: valerii.serpiva@skoltech.ru
+  
 - **Sausar Karaf**
-  System Engineering PhD, Skoltech 
+  System Engineering PhD, Skoltech
   Email: sausar.karaf@skoltech.ru 
 
 ## How to Use
