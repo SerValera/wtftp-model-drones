@@ -2,6 +2,8 @@
 
 This project is based on the paper "Flight trajectory prediction enabled by time-frequency wavelet transform" by Zhang et al. The repository has been adapted as a final project for the Skoltech course "Theoretical Methods of Deep Learning." It focuses on predicting drone poses in a laboratory environment. All necessary scripts for data analysis and plotting are included.
 
+<p  align="middle"><img src="pics/traj_plots.png"  width="95%"/></p>
+
 ## Paper Details
 - **Reference**: Zhang, Z., Guo, D., Zhou, S. et al. *Flight trajectory prediction enabled by time-frequency wavelet transform*. Nat Commun 14, 5258 (2023). [DOI:10.1038/s41467-023-40903-9](https://doi.org/10.1038/s41467-023-40903-9)
 - **Original Repository**: [https://github.com/MusDev7/wtftp-model](https://github.com/MusDev7/wtftp-model)
@@ -10,7 +12,8 @@ This project is based on the paper "Flight trajectory prediction enabled by time
 - **Valerii Serpiva**  
   System Engineering PhD, Skoltech  
   Email: valerii.serpiva@skoltech.ru
-- **Sausar Karaf**  
+- **Sausar Karaf** 
+  System Engineering PhD, Skoltech  
   Email: Sausar.Karaf@skoltech.ru
 
 ## How to Use
