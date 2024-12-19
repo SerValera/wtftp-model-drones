@@ -1,0 +1,1449 @@
+2024-12-19 11:46:28,932   model details:
+{'self': WTFTP(
+  (inp_embding): Sequential(
+    (0): Embed(
+      (embed): Linear(in_features=6, out_features=32, bias=False)
+    )
+    (1): ReLU()
+    (2): Embed(
+      (embed): Linear(in_features=32, out_features=64, bias=False)
+    )
+    (3): ReLU()
+  )
+  (encoder): LSTM(64, 64, num_layers=4, bias=False, batch_first=True)
+  (Wt_attns): ModuleList(
+    (0): WaveletAttention(
+      (enhance): EnhancedBlock(
+        (comp): Sequential(
+          (0): Linear(in_features=64, out_features=32, bias=False)
+          (1): ReLU()
+          (2): Linear(in_features=32, out_features=1, bias=False)
+        )
+        (activate): Sequential(
+          (0): Linear(in_features=9, out_features=4, bias=False)
+          (1): ReLU()
+          (2): Linear(in_features=4, out_features=9, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (convs): Sequential(
+        (0): Conv1d(64, 64, kernel_size=(2,), stride=(2,), padding=(1,), bias=False)
+        (1): ReLU()
+      )
+    )
+    (1): WaveletAttention(
+      (enhance): EnhancedBlock(
+        (comp): Sequential(
+          (0): Linear(in_features=64, out_features=32, bias=False)
+          (1): ReLU()
+          (2): Linear(in_features=32, out_features=1, bias=False)
+        )
+        (activate): Sequential(
+          (0): Linear(in_features=9, out_features=4, bias=False)
+          (1): ReLU()
+          (2): Linear(in_features=4, out_features=9, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (convs): Sequential(
+        (0): Conv1d(64, 64, kernel_size=(3,), stride=(3,), bias=False)
+        (1): ReLU()
+      )
+    )
+    (2): WaveletAttention(
+      (enhance): EnhancedBlock(
+        (comp): Sequential(
+          (0): Linear(in_features=64, out_features=32, bias=False)
+          (1): ReLU()
+          (2): Linear(in_features=32, out_features=1, bias=False)
+        )
+        (activate): Sequential(
+          (0): Linear(in_features=9, out_features=4, bias=False)
+          (1): ReLU()
+          (2): Linear(in_features=4, out_features=9, bias=False)
+          (3): Sigmoid()
+        )
+      )
+      (convs): Sequential(
+        (0): Conv1d(64, 64, kernel_size=(3,), stride=(3,), bias=False)
+        (1): ReLU()
+      )
+    )
+  )
+  (decoders): ModuleList(
+    (0): LSTM(64, 64, bias=False, batch_first=True)
+    (1): LSTM(64, 64, bias=False, batch_first=True)
+    (2): LSTM(64, 64, bias=False, batch_first=True)
+  )
+  (LNs): ModuleList(
+    (0): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  )
+  (oup_embdings): ModuleList(
+    (0): Embed(
+      (embed): Linear(in_features=64, out_features=6, bias=True)
+    )
+    (1): Embed(
+      (embed): Linear(in_features=64, out_features=6, bias=True)
+    )
+    (2): Embed(
+      (embed): Linear(in_features=64, out_features=6, bias=True)
+    )
+  )
+), 'n_inp': 6, 'en_layers': 4, 'activation': 'relu', 'maxlevel': 2, 'en_dropout': 0.0, 'out_split': False, 'decoder_init_zero': False, 'attn_conv_params': None, 'bias': True, 'de_dropout': 0.0, 'de_layers': 1, 'his_step': 9, 'n_embding': 64, 'n_oup': 6, 'proj': 'linear', 'se_skip': True, '__class__': <class 'model.WTFTP'>, 'train_opt': Namespace(L2details=False, attn=True, batch_size=64, bidirectional=False, comments='', cpu=False, cuda=0, datadir='./data', debug=False, delayer=1, dpot=0.0, embding=64, enlayer=4, epoch=40, interval=1, logdir='./log', lr=0.0002, maxlevel=2, minibatch_len=10, nologging=False, saving_model_num=1, w_hi=1.0, w_lo=1.0, w_spatial=0.0, wavelet='haar', wt_mode='symmetric')}
+2024-12-19 11:46:28,932   /home/vs/wtftp-model/log/24-12-19/epoch_40.pt
+2024-12-19 11:46:29,095   
+Step 1: 
+aveMSE(scaled): 0.00520300, in each attr(RMSE, unscaled): {'lon': 0.045885875821113586, 'lat': 0.0710328221321106, 'alt': 0.009012693539261818, 'spdx': 0.37523552775382996, 'spdy': 0.4719680845737457, 'spdz': 0.03571641445159912}
+aveMAE(scaled): 0.04466728, in each attr(MAE, unscaled): {'lon': 0.03291773796081543, 'lat': 0.0486065074801445, 'alt': 0.006437245290726423, 'spdx': 0.2306738644838333, 'spdy': 0.2811717092990875, 'spdz': 0.023797234520316124}
+In each attr(MRE, %): {'lon': -6.662105768918991, 'lat': 1.7098067328333855, 'alt': 0.642543425783515, 'spdx': 'N/A', 'spdy': 'N/A', 'spdz': 'N/A'}
+MDE(unscaled): 0.06398499
+
+2024-12-19 11:47:13,759   findfont: Matching arial:style=normal:variant=normal:weight=normal:stretch=normal:size=7.0.
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,760   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'Gargi' (Gargi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'FreeMono' (FreeMonoBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'C059' (C059-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,761   findfont: score(<Font 'Navilu' (Navilu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'C059' (C059-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,761   findfont: score(<Font 'Rekha' (Rekha.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,761   findfont: score(<Font 'Vemana2000' (vemana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Waree' (Waree-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'URW Bookman' (URWBookman-DemiItalic.otf) italic normal book normal>) = 11.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'URW Bookman' (URWBookman-LightItalic.otf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,762   findfont: score(<Font 'Waree' (Waree-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,762   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,762   findfont: score(<Font 'Yrsa' (Yrsa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,762   findfont: score(<Font 'Norasi' (Norasi-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,762   findfont: score(<Font 'Tlwg Typo' (TlwgTypo.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Chandas' (chandas1-2.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Khmer OS System' (KhmerOSsys.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'AnjaliOldLipi' (AnjaliOldLipi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'P052' (P052-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,762   findfont: score(<Font 'KacstOne' (KacstOne.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Italic.ttf) italic normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,762   findfont: score(<Font 'Lohit Malayalam' (Lohit-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Mitra Mono' (mitra.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Khmer OS' (KhmerOS.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,762   findfont: score(<Font 'Yrsa' (Yrsa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,762   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,762   findfont: score(<Font 'KacstOne' (KacstOne-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,762   findfont: score(<Font 'Kinnari' (Kinnari-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,762   findfont: score(<Font 'Ubuntu Condensed' (Ubuntu-C.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,763   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Bold.otf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,763   findfont: score(<Font 'Umpush' (Umpush-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,763   findfont: score(<Font 'Nakula' (nakula.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'C059' (C059-BdIta.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,763   findfont: score(<Font 'Phetsarath OT' (Phetsarath_OT.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Bitstream Vera Sans' (VeraBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,763   findfont: score(<Font 'Gayathri' (Gayathri-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,763   findfont: score(<Font 'Kinnari' (Kinnari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Kalimati' (kalimati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Lato' (Lato-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,763   findfont: score(<Font 'Abyssinica SIL' (AbyssinicaSIL-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Samyak Malayalam' (Samyak-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Saab' (Saab.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'KacstPoster' (KacstPoster.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'KacstTitleL' (KacstTitleL.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'KacstArt' (KacstArt.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'KacstNaskh' (KacstNaskh.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Lato' (Lato-ThinItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Garuda' (Garuda-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Purisa' (Purisa-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Ubuntu' (Ubuntu-Th.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'Lohit Bengali' (Lohit-Bengali.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,763   findfont: score(<Font 'RaghuMalayalamSans' (RaghuMalayalamSans-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Norasi' (Norasi-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'Lohit Odia' (Lohit-Odia.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Bitstream Vera Sans' (VeraBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Regular.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,764   findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Lato' (Lato-Thin.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Garuda' (Garuda.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Purisa' (Purisa-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'Liberation Sans' (LiberationSans-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-BoldItalic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,764   findfont: score(<Font 'Lohit Tamil Classical' (Lohit-Tamil-Classical.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Likhan' (LikhanNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'Mukti Narrow' (MuktiNarrow.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Sawasdee' (Sawasdee-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Liberation Sans' (LiberationSans-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'Rasa' (Rasa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Lato' (Lato-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'KacstOffice' (KacstOffice.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Laksaman' (Laksaman.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,764   findfont: score(<Font 'FreeMono' (FreeMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,764   findfont: score(<Font 'Gayathri' (Gayathri-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Sarai' (Sarai.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,765   findfont: score(<Font 'Lato' (Lato-HeavyItalic.ttf) italic normal heavy normal>) = 11.43
+2024-12-19 11:47:13,765   findfont: score(<Font 'Ubuntu' (Ubuntu-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,765   findfont: score(<Font 'Lato' (Lato-MediumItalic.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,765   findfont: score(<Font 'Tibetan Machine Uni' (TibetanMachineUni.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Jamrul' (JamrulNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Norasi' (Norasi-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,765   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Standard Symbols PS' (StandardSymbolsPS.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Loma' (Loma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Waree' (Waree-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,765   findfont: score(<Font 'Norasi' (Norasi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Rasa' (Rasa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,765   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Bold.ttf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,765   findfont: score(<Font 'Tlwg Mono' (TlwgMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Liberation Serif' (LiberationSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,765   findfont: score(<Font 'Ubuntu' (Ubuntu-M.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,765   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'Laksaman' (Laksaman-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,765   findfont: score(<Font 'FreeSans' (FreeSansBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,765   findfont: score(<Font 'Lato' (Lato-BlackItalic.ttf) italic normal black normal>) = 11.525
+2024-12-19 11:47:13,766   findfont: score(<Font 'esint10' (esint10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Z003' (Z003-MediumItalic.otf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,766   findfont: score(<Font 'Lohit Assamese' (Lohit-Assamese.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Lohit Telugu' (Lohit-Telugu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'msam10' (msam10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,766   findfont: score(<Font 'eufm10' (eufm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Liberation Mono' (LiberationMono-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,766   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Umpush' (Umpush-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,766   findfont: score(<Font 'FreeSans' (FreeSansOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'URW Bookman' (URWBookman-Demi.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Bitstream Vera Sans' (VeraIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'KacstBook' (KacstBook.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'KacstQurn' (KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Sawasdee' (Sawasdee-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,766   findfont: score(<Font 'ori1Uni' (utkal.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,766   findfont: score(<Font 'FreeSerif' (FreeSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'Karumbi' (Karumbi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'P052' (P052-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,766   findfont: score(<Font 'Samanata' (samanata.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,766   findfont: score(<Font 'FreeSans' (FreeSansBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,766   findfont: score(<Font 'padmaa' (padmaa-Medium-0.5.ttf) normal normal normal normal>) = 10.0
+2024-12-19 11:47:13,767   findfont: score(<Font 'Lato' (Lato-LightItalic.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,767   findfont: score(<Font 'Ubuntu' (Ubuntu-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'Lato' (Lato-Semibold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,767   findfont: score(<Font 'Samyak Gujarati' (Samyak-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Liberation Sans' (LiberationSans-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'Purisa' (Purisa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'FreeMono' (FreeMonoOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'Yrsa' (Yrsa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'Gubbi' (Gubbi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Padauk Book' (PadaukBook-Bold.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Umpush' (Umpush.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'KacstFarsi' (KacstFarsi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Manjari' (Manjari-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Suruma' (Suruma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Rasa' (Rasa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'URW Gothic' (URWGothic-Demi.otf) normal normal demi normal>) = 10.24
+2024-12-19 11:47:13,767   findfont: score(<Font 'Lohit Tamil' (Lohit-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Loma' (Loma-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,767   findfont: score(<Font 'FreeSerif' (FreeSerifItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Sawasdee' (Sawasdee.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,767   findfont: score(<Font 'Liberation Sans' (LiberationSans-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'Ubuntu' (Ubuntu-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'Laksaman' (Laksaman-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'KacstPen' (KacstPen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Meera' (Meera-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Italic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,768   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'Padauk Book' (PadaukBook-Regular.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Umpush' (Umpush-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,768   findfont: score(<Font 'Laksaman' (Laksaman-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'LKLUG' (lklug.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Norasi' (Norasi-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'Gayathri' (Gayathri-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Rachana' (Rachana-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'Ubuntu' (Ubuntu-LI.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,768   findfont: score(<Font 'FreeSerif' (FreeSerifBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,768   findfont: score(<Font 'Rasa' (Rasa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,768   findfont: score(<Font 'Sahadeva' (sahadeva.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Manjari' (Manjari-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Lato' (Lato-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,768   findfont: score(<Font 'Kinnari' (Kinnari-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'aakar' (aakar-medium.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,768   findfont: score(<Font 'Lohit Kannada' (Lohit-Kannada.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Lato' (Lato-Black.ttf) normal normal black normal>) = 10.525
+2024-12-19 11:47:13,769   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Chilanka' (Chilanka-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Lohit Gujarati' (Lohit-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Dyuthi' (Dyuthi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'P052' (P052-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,769   findfont: score(<Font 'Ubuntu' (Ubuntu-L.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,769   findfont: score(<Font 'URW Gothic' (URWGothic-Book.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Sawasdee' (Sawasdee-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,769   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-BoldOblique.otf) oblique normal bold condensed>) = 11.535
+2024-12-19 11:47:13,769   findfont: score(<Font 'Uroob' (Uroob-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Bold.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,769   findfont: score(<Font 'Liberation Mono' (LiberationMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,769   findfont: score(<Font 'Lato' (Lato-Hairline.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Lohit Gurmukhi' (Lohit-Gurmukhi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Lato' (Lato-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Padauk' (Padauk-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Liberation Mono' (LiberationMono-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Samyak Devanagari' (Samyak-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'Rachana' (Rachana-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,769   findfont: score(<Font 'P052' (P052-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Regular.otf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,770   findfont: score(<Font 'Rasa' (Rasa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,770   findfont: score(<Font 'Yrsa' (Yrsa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Lato' (Lato-HairlineItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,770   findfont: score(<Font 'Ani' (ani.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Norasi' (Norasi-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'FreeSans' (FreeSans.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'URW Bookman' (URWBookman-Light.otf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,770   findfont: score(<Font 'Pagul' (Pagul.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'stmary10' (stmary10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Tlwg Typist' (TlwgTypist.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'KacstScreen' (KacstScreen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'URW Gothic' (URWGothic-BookOblique.otf) oblique normal book normal>) = 11.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Tlwg Mono' (TlwgMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,770   findfont: score(<Font 'Kinnari' (Kinnari-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'D050000L' (D050000L.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Kinnari' (Kinnari-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,770   findfont: score(<Font 'FreeMono' (FreeMonoBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,770   findfont: score(<Font 'Umpush' (Umpush-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,770   findfont: score(<Font 'Liberation Mono' (LiberationMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,770   findfont: score(<Font 'Umpush' (Umpush-LightOblique.ttf) oblique normal light normal>) = 11.24
+2024-12-19 11:47:13,771   findfont: score(<Font 'padmaa-Bold.1.1' (padmaa-Bold.1.1.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'Lato' (Lato-Heavy.ttf) normal normal heavy normal>) = 10.43
+2024-12-19 11:47:13,771   findfont: score(<Font 'Keraleeyam' (Keraleeyam-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Manjari' (Manjari-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'Garuda' (Garuda-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'Loma' (Loma-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'wasy10' (wasy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Bitstream Vera Serif' (VeraSeBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'OpenSymbol' (opens___.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'Bitstream Vera Sans' (Vera.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-BoldItalic.ttf) italic normal bold condensed>) = 11.535
+2024-12-19 11:47:13,771   findfont: score(<Font 'Lohit Devanagari' (Lohit-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'rsfs10' (rsfs10.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Regular.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,771   findfont: score(<Font 'Lato' (Lato-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Lato' (Lato-SemiboldItalic.ttf) italic normal semibold normal>) = 11.24
+2024-12-19 11:47:13,771   findfont: score(<Font 'Ubuntu' (Ubuntu-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Kalapi' (Kalapi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Mukti Narrow' (MuktiNarrowBold.ttf) normal normal 700 normal>) = 10.335
+2024-12-19 11:47:13,771   findfont: score(<Font 'C059' (C059-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'msbm10' (msbm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,771   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,772   findfont: score(<Font 'Nimbus Sans' (NimbusSans-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,772   findfont: score(<Font 'Garuda' (Garuda-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,772   findfont: score(<Font 'Loma' (Loma-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'KacstDigital' (KacstDigital.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'KacstTitle' (KacstTitle.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'FreeSerif' (FreeSerifBoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,772   findfont: score(<Font 'Ubuntu' (Ubuntu-MI.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,772   findfont: score(<Font 'URW Gothic' (URWGothic-DemiOblique.otf) oblique normal demi normal>) = 11.24
+2024-12-19 11:47:13,772   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Oblique.otf) oblique normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,772   findfont: score(<Font 'padmaa' (padmaa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Purisa' (Purisa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Yrsa' (Yrsa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,772   findfont: score(<Font 'Bitstream Vera Serif' (VeraSe.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'mry_KacstQurn' (mry_KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'KacstLetter' (KacstLetter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'KacstDecorative' (KacstDecorative.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Samyak Tamil' (Samyak-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Lato' (Lato-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Padauk' (Padauk-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,772   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,772   findfont: score(<Font 'Waree' (Waree.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,772   findfont: score(<Font 'Kinnari' (Kinnari-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,772   findfont: Font family ['arial'] not found. Falling back to DejaVu Sans.
+2024-12-19 11:47:13,773   findfont: Matching DejaVu Sans:style=normal:variant=normal:weight=normal:stretch=normal:size=7.0.
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 1.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 0.05
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,773   findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 0.33499999999999996
+2024-12-19 11:47:13,774   findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 1.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'Gargi' (Gargi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'FreeMono' (FreeMonoBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'C059' (C059-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,774   findfont: score(<Font 'Navilu' (Navilu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,774   findfont: score(<Font 'C059' (C059-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,774   findfont: score(<Font 'Rekha' (Rekha.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Vemana2000' (vemana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Waree' (Waree-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'URW Bookman' (URWBookman-DemiItalic.otf) italic normal book normal>) = 11.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'URW Bookman' (URWBookman-LightItalic.otf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,775   findfont: score(<Font 'Waree' (Waree-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,775   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,775   findfont: score(<Font 'Yrsa' (Yrsa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,775   findfont: score(<Font 'Norasi' (Norasi-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,775   findfont: score(<Font 'Tlwg Typo' (TlwgTypo.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Chandas' (chandas1-2.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Khmer OS System' (KhmerOSsys.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'AnjaliOldLipi' (AnjaliOldLipi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'P052' (P052-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,775   findfont: score(<Font 'KacstOne' (KacstOne.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Italic.ttf) italic normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,775   findfont: score(<Font 'Lohit Malayalam' (Lohit-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Mitra Mono' (mitra.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Khmer OS' (KhmerOS.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,775   findfont: score(<Font 'Yrsa' (Yrsa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,775   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,775   findfont: score(<Font 'KacstOne' (KacstOne-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,775   findfont: score(<Font 'Kinnari' (Kinnari-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,775   findfont: score(<Font 'Ubuntu Condensed' (Ubuntu-C.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,776   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Bold.otf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,776   findfont: score(<Font 'Umpush' (Umpush-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,776   findfont: score(<Font 'Nakula' (nakula.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'C059' (C059-BdIta.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,776   findfont: score(<Font 'Phetsarath OT' (Phetsarath_OT.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Bitstream Vera Sans' (VeraBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,776   findfont: score(<Font 'Gayathri' (Gayathri-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,776   findfont: score(<Font 'Kinnari' (Kinnari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Kalimati' (kalimati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Lato' (Lato-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,776   findfont: score(<Font 'Abyssinica SIL' (AbyssinicaSIL-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Samyak Malayalam' (Samyak-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Saab' (Saab.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'KacstPoster' (KacstPoster.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'KacstTitleL' (KacstTitleL.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'KacstArt' (KacstArt.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'KacstNaskh' (KacstNaskh.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Lato' (Lato-ThinItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Garuda' (Garuda-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Purisa' (Purisa-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Ubuntu' (Ubuntu-Th.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Lohit Bengali' (Lohit-Bengali.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'RaghuMalayalamSans' (RaghuMalayalamSans-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,776   findfont: score(<Font 'Norasi' (Norasi-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'Lohit Odia' (Lohit-Odia.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Bitstream Vera Sans' (VeraBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Regular.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,777   findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Lato' (Lato-Thin.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Garuda' (Garuda.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Purisa' (Purisa-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'Liberation Sans' (LiberationSans-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-BoldItalic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,777   findfont: score(<Font 'Lohit Tamil Classical' (Lohit-Tamil-Classical.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Likhan' (LikhanNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'Mukti Narrow' (MuktiNarrow.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Sawasdee' (Sawasdee-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Liberation Sans' (LiberationSans-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'Rasa' (Rasa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Lato' (Lato-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'KacstOffice' (KacstOffice.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Laksaman' (Laksaman.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,777   findfont: score(<Font 'FreeMono' (FreeMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Gayathri' (Gayathri-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,777   findfont: score(<Font 'Sarai' (Sarai.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,778   findfont: score(<Font 'Lato' (Lato-HeavyItalic.ttf) italic normal heavy normal>) = 11.43
+2024-12-19 11:47:13,778   findfont: score(<Font 'Ubuntu' (Ubuntu-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,778   findfont: score(<Font 'Lato' (Lato-MediumItalic.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,778   findfont: score(<Font 'Tibetan Machine Uni' (TibetanMachineUni.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Jamrul' (JamrulNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Norasi' (Norasi-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,778   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Standard Symbols PS' (StandardSymbolsPS.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Loma' (Loma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Waree' (Waree-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,778   findfont: score(<Font 'Norasi' (Norasi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Rasa' (Rasa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,778   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Bold.ttf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,778   findfont: score(<Font 'Tlwg Mono' (TlwgMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Liberation Serif' (LiberationSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,778   findfont: score(<Font 'Ubuntu' (Ubuntu-M.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,778   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Laksaman' (Laksaman-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'FreeSans' (FreeSansBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,778   findfont: score(<Font 'Lato' (Lato-BlackItalic.ttf) italic normal black normal>) = 11.525
+2024-12-19 11:47:13,778   findfont: score(<Font 'esint10' (esint10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,778   findfont: score(<Font 'Z003' (Z003-MediumItalic.otf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,778   findfont: score(<Font 'Lohit Assamese' (Lohit-Assamese.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Lohit Telugu' (Lohit-Telugu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'msam10' (msam10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'eufm10' (eufm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Liberation Mono' (LiberationMono-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Umpush' (Umpush-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'FreeSans' (FreeSansOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'URW Bookman' (URWBookman-Demi.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Bitstream Vera Sans' (VeraIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'KacstBook' (KacstBook.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'KacstQurn' (KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Sawasdee' (Sawasdee-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'ori1Uni' (utkal.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,779   findfont: score(<Font 'FreeSerif' (FreeSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'Karumbi' (Karumbi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'P052' (P052-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'Samanata' (samanata.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,779   findfont: score(<Font 'FreeSans' (FreeSansBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'padmaa' (padmaa-Medium-0.5.ttf) normal normal normal normal>) = 10.0
+2024-12-19 11:47:13,779   findfont: score(<Font 'Lato' (Lato-LightItalic.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,779   findfont: score(<Font 'Ubuntu' (Ubuntu-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,779   findfont: score(<Font 'Lato' (Lato-Semibold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,780   findfont: score(<Font 'Samyak Gujarati' (Samyak-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Liberation Sans' (LiberationSans-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'Purisa' (Purisa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'FreeMono' (FreeMonoOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'Yrsa' (Yrsa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'Gubbi' (Gubbi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Padauk Book' (PadaukBook-Bold.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Umpush' (Umpush.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'KacstFarsi' (KacstFarsi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Manjari' (Manjari-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Suruma' (Suruma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Rasa' (Rasa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'URW Gothic' (URWGothic-Demi.otf) normal normal demi normal>) = 10.24
+2024-12-19 11:47:13,780   findfont: score(<Font 'Lohit Tamil' (Lohit-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Loma' (Loma-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'FreeSerif' (FreeSerifItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Sawasdee' (Sawasdee.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Liberation Sans' (LiberationSans-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'Ubuntu' (Ubuntu-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,780   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,780   findfont: score(<Font 'Laksaman' (Laksaman-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,781   findfont: score(<Font 'KacstPen' (KacstPen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Meera' (Meera-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Italic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,781   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,781   findfont: score(<Font 'Padauk Book' (PadaukBook-Regular.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Umpush' (Umpush-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,781   findfont: score(<Font 'Laksaman' (Laksaman-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,781   findfont: score(<Font 'LKLUG' (lklug.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Norasi' (Norasi-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,781   findfont: score(<Font 'Gayathri' (Gayathri-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Rachana' (Rachana-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,781   findfont: score(<Font 'Ubuntu' (Ubuntu-LI.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,781   findfont: score(<Font 'FreeSerif' (FreeSerifBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,781   findfont: score(<Font 'Rasa' (Rasa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,781   findfont: score(<Font 'Sahadeva' (sahadeva.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Manjari' (Manjari-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Lato' (Lato-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,781   findfont: score(<Font 'Kinnari' (Kinnari-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'aakar' (aakar-medium.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Lohit Kannada' (Lohit-Kannada.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,781   findfont: score(<Font 'Lato' (Lato-Black.ttf) normal normal black normal>) = 10.525
+2024-12-19 11:47:13,781   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Chilanka' (Chilanka-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Lohit Gujarati' (Lohit-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Dyuthi' (Dyuthi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'P052' (P052-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,782   findfont: score(<Font 'Ubuntu' (Ubuntu-L.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,782   findfont: score(<Font 'URW Gothic' (URWGothic-Book.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Sawasdee' (Sawasdee-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,782   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-BoldOblique.otf) oblique normal bold condensed>) = 11.535
+2024-12-19 11:47:13,782   findfont: score(<Font 'Uroob' (Uroob-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Bold.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,782   findfont: score(<Font 'Liberation Mono' (LiberationMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,782   findfont: score(<Font 'Lato' (Lato-Hairline.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Lohit Gurmukhi' (Lohit-Gurmukhi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Lato' (Lato-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Padauk' (Padauk-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Liberation Mono' (LiberationMono-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Samyak Devanagari' (Samyak-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Rachana' (Rachana-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'P052' (P052-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Regular.otf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,782   findfont: score(<Font 'Rasa' (Rasa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,782   findfont: score(<Font 'Yrsa' (Yrsa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,782   findfont: score(<Font 'Lato' (Lato-HairlineItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,783   findfont: score(<Font 'Ani' (ani.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Norasi' (Norasi-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'FreeSans' (FreeSans.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'URW Bookman' (URWBookman-Light.otf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,783   findfont: score(<Font 'Pagul' (Pagul.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'stmary10' (stmary10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Tlwg Typist' (TlwgTypist.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'KacstScreen' (KacstScreen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'URW Gothic' (URWGothic-BookOblique.otf) oblique normal book normal>) = 11.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Tlwg Mono' (TlwgMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,783   findfont: score(<Font 'Kinnari' (Kinnari-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'D050000L' (D050000L.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Kinnari' (Kinnari-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,783   findfont: score(<Font 'FreeMono' (FreeMonoBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,783   findfont: score(<Font 'Umpush' (Umpush-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,783   findfont: score(<Font 'Liberation Mono' (LiberationMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Umpush' (Umpush-LightOblique.ttf) oblique normal light normal>) = 11.24
+2024-12-19 11:47:13,783   findfont: score(<Font 'padmaa-Bold.1.1' (padmaa-Bold.1.1.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,783   findfont: score(<Font 'Lato' (Lato-Heavy.ttf) normal normal heavy normal>) = 10.43
+2024-12-19 11:47:13,783   findfont: score(<Font 'Keraleeyam' (Keraleeyam-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,783   findfont: score(<Font 'Manjari' (Manjari-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Garuda' (Garuda-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Loma' (Loma-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'wasy10' (wasy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Bitstream Vera Serif' (VeraSeBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'OpenSymbol' (opens___.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Bitstream Vera Sans' (Vera.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-BoldItalic.ttf) italic normal bold condensed>) = 11.535
+2024-12-19 11:47:13,784   findfont: score(<Font 'Lohit Devanagari' (Lohit-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'rsfs10' (rsfs10.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Regular.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,784   findfont: score(<Font 'Lato' (Lato-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Lato' (Lato-SemiboldItalic.ttf) italic normal semibold normal>) = 11.24
+2024-12-19 11:47:13,784   findfont: score(<Font 'Ubuntu' (Ubuntu-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Kalapi' (Kalapi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Mukti Narrow' (MuktiNarrowBold.ttf) normal normal 700 normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'C059' (C059-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'msbm10' (msbm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Nimbus Sans' (NimbusSans-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Garuda' (Garuda-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,784   findfont: score(<Font 'Loma' (Loma-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'KacstDigital' (KacstDigital.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,784   findfont: score(<Font 'KacstTitle' (KacstTitle.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'FreeSerif' (FreeSerifBoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,785   findfont: score(<Font 'Ubuntu' (Ubuntu-MI.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,785   findfont: score(<Font 'URW Gothic' (URWGothic-DemiOblique.otf) oblique normal demi normal>) = 11.24
+2024-12-19 11:47:13,785   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Oblique.otf) oblique normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,785   findfont: score(<Font 'padmaa' (padmaa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Purisa' (Purisa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Yrsa' (Yrsa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,785   findfont: score(<Font 'Bitstream Vera Serif' (VeraSe.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'mry_KacstQurn' (mry_KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'KacstLetter' (KacstLetter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'KacstDecorative' (KacstDecorative.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Samyak Tamil' (Samyak-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Lato' (Lato-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Padauk' (Padauk-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,785   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,785   findfont: score(<Font 'Waree' (Waree.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,785   findfont: score(<Font 'Kinnari' (Kinnari-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,785   findfont: Matching DejaVu Sans:style=normal:variant=normal:weight=normal:stretch=normal:size=7.0 to DejaVu Sans ('/home/vs/anaconda3/envs/my_env/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2024-12-19 11:47:13,809   not adjusting title pos because a title was already placed manually: 0.920000
+2024-12-19 11:47:13,819   findfont: Matching arial:style=normal:variant=normal:weight=normal:stretch=normal:size=8.4.
+2024-12-19 11:47:13,819   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,820   findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,820   findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'Gargi' (Gargi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'FreeMono' (FreeMonoBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'C059' (C059-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,821   findfont: score(<Font 'Navilu' (Navilu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'C059' (C059-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,821   findfont: score(<Font 'Rekha' (Rekha.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'Vemana2000' (vemana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'Waree' (Waree-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'URW Bookman' (URWBookman-DemiItalic.otf) italic normal book normal>) = 11.05
+2024-12-19 11:47:13,821   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'URW Bookman' (URWBookman-LightItalic.otf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,822   findfont: score(<Font 'Waree' (Waree-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'Yrsa' (Yrsa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,822   findfont: score(<Font 'Norasi' (Norasi-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'Tlwg Typo' (TlwgTypo.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Chandas' (chandas1-2.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Khmer OS System' (KhmerOSsys.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'AnjaliOldLipi' (AnjaliOldLipi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'P052' (P052-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,822   findfont: score(<Font 'KacstOne' (KacstOne.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Italic.ttf) italic normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,822   findfont: score(<Font 'Lohit Malayalam' (Lohit-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Mitra Mono' (mitra.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Khmer OS' (KhmerOS.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'Yrsa' (Yrsa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,822   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'KacstOne' (KacstOne-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'Kinnari' (Kinnari-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'Ubuntu Condensed' (Ubuntu-C.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,822   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Bold.otf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,822   findfont: score(<Font 'Umpush' (Umpush-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,822   findfont: score(<Font 'Nakula' (nakula.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,822   findfont: score(<Font 'C059' (C059-BdIta.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,823   findfont: score(<Font 'Phetsarath OT' (Phetsarath_OT.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Bitstream Vera Sans' (VeraBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,823   findfont: score(<Font 'Gayathri' (Gayathri-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,823   findfont: score(<Font 'Kinnari' (Kinnari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Kalimati' (kalimati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Lato' (Lato-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,823   findfont: score(<Font 'Abyssinica SIL' (AbyssinicaSIL-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Samyak Malayalam' (Samyak-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Saab' (Saab.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'KacstPoster' (KacstPoster.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'KacstTitleL' (KacstTitleL.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'KacstArt' (KacstArt.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'KacstNaskh' (KacstNaskh.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Lato' (Lato-ThinItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Garuda' (Garuda-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Purisa' (Purisa-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Ubuntu' (Ubuntu-Th.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Lohit Bengali' (Lohit-Bengali.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'RaghuMalayalamSans' (RaghuMalayalamSans-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Norasi' (Norasi-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,823   findfont: score(<Font 'Lohit Odia' (Lohit-Odia.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,823   findfont: score(<Font 'Bitstream Vera Sans' (VeraBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,823   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Regular.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,824   findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Lato' (Lato-Thin.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Garuda' (Garuda.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Purisa' (Purisa-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'Liberation Sans' (LiberationSans-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-BoldItalic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,824   findfont: score(<Font 'Lohit Tamil Classical' (Lohit-Tamil-Classical.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Likhan' (LikhanNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'Mukti Narrow' (MuktiNarrow.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Sawasdee' (Sawasdee-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Liberation Sans' (LiberationSans-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'Rasa' (Rasa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Lato' (Lato-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'KacstOffice' (KacstOffice.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Laksaman' (Laksaman.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'FreeMono' (FreeMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Gayathri' (Gayathri-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Sarai' (Sarai.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,824   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,824   findfont: score(<Font 'Lato' (Lato-HeavyItalic.ttf) italic normal heavy normal>) = 11.43
+2024-12-19 11:47:13,824   findfont: score(<Font 'Ubuntu' (Ubuntu-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,825   findfont: score(<Font 'Lato' (Lato-MediumItalic.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,825   findfont: score(<Font 'Tibetan Machine Uni' (TibetanMachineUni.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Jamrul' (JamrulNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Norasi' (Norasi-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,825   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Standard Symbols PS' (StandardSymbolsPS.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Loma' (Loma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Waree' (Waree-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,825   findfont: score(<Font 'Norasi' (Norasi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Rasa' (Rasa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,825   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Bold.ttf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,825   findfont: score(<Font 'Tlwg Mono' (TlwgMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Liberation Serif' (LiberationSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,825   findfont: score(<Font 'Ubuntu' (Ubuntu-M.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,825   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Laksaman' (Laksaman-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'FreeSans' (FreeSansBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,825   findfont: score(<Font 'Lato' (Lato-BlackItalic.ttf) italic normal black normal>) = 11.525
+2024-12-19 11:47:13,825   findfont: score(<Font 'esint10' (esint10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Z003' (Z003-MediumItalic.otf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,825   findfont: score(<Font 'Lohit Assamese' (Lohit-Assamese.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'Lohit Telugu' (Lohit-Telugu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,825   findfont: score(<Font 'msam10' (msam10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'eufm10' (eufm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Liberation Mono' (LiberationMono-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Umpush' (Umpush-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'FreeSans' (FreeSansOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'URW Bookman' (URWBookman-Demi.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Bitstream Vera Sans' (VeraIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'KacstBook' (KacstBook.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'KacstQurn' (KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Sawasdee' (Sawasdee-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'ori1Uni' (utkal.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,826   findfont: score(<Font 'FreeSerif' (FreeSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'Karumbi' (Karumbi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'P052' (P052-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'Samanata' (samanata.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,826   findfont: score(<Font 'FreeSans' (FreeSansBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'padmaa' (padmaa-Medium-0.5.ttf) normal normal normal normal>) = 10.0
+2024-12-19 11:47:13,826   findfont: score(<Font 'Lato' (Lato-LightItalic.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,826   findfont: score(<Font 'Ubuntu' (Ubuntu-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,826   findfont: score(<Font 'Lato' (Lato-Semibold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,826   findfont: score(<Font 'Samyak Gujarati' (Samyak-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Liberation Sans' (LiberationSans-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'Purisa' (Purisa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'FreeMono' (FreeMonoOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'Yrsa' (Yrsa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'Gubbi' (Gubbi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Padauk Book' (PadaukBook-Bold.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Umpush' (Umpush.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'KacstFarsi' (KacstFarsi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Manjari' (Manjari-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Suruma' (Suruma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Rasa' (Rasa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'URW Gothic' (URWGothic-Demi.otf) normal normal demi normal>) = 10.24
+2024-12-19 11:47:13,827   findfont: score(<Font 'Lohit Tamil' (Lohit-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Loma' (Loma-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'FreeSerif' (FreeSerifItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Sawasdee' (Sawasdee.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Liberation Sans' (LiberationSans-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'Ubuntu' (Ubuntu-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'Laksaman' (Laksaman-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,827   findfont: score(<Font 'KacstPen' (KacstPen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,827   findfont: score(<Font 'Meera' (Meera-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Italic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,828   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,828   findfont: score(<Font 'Padauk Book' (PadaukBook-Regular.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Umpush' (Umpush-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,828   findfont: score(<Font 'Laksaman' (Laksaman-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,828   findfont: score(<Font 'LKLUG' (lklug.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Norasi' (Norasi-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,828   findfont: score(<Font 'Gayathri' (Gayathri-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Rachana' (Rachana-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,828   findfont: score(<Font 'Ubuntu' (Ubuntu-LI.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,828   findfont: score(<Font 'FreeSerif' (FreeSerifBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,828   findfont: score(<Font 'Rasa' (Rasa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,828   findfont: score(<Font 'Sahadeva' (sahadeva.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Manjari' (Manjari-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Lato' (Lato-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,828   findfont: score(<Font 'Kinnari' (Kinnari-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'aakar' (aakar-medium.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Lohit Kannada' (Lohit-Kannada.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Lato' (Lato-Black.ttf) normal normal black normal>) = 10.525
+2024-12-19 11:47:13,828   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,828   findfont: score(<Font 'Chilanka' (Chilanka-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Lohit Gujarati' (Lohit-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Dyuthi' (Dyuthi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'P052' (P052-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,829   findfont: score(<Font 'Ubuntu' (Ubuntu-L.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,829   findfont: score(<Font 'URW Gothic' (URWGothic-Book.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Sawasdee' (Sawasdee-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,829   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-BoldOblique.otf) oblique normal bold condensed>) = 11.535
+2024-12-19 11:47:13,829   findfont: score(<Font 'Uroob' (Uroob-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Bold.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,829   findfont: score(<Font 'Liberation Mono' (LiberationMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,829   findfont: score(<Font 'Lato' (Lato-Hairline.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Lohit Gurmukhi' (Lohit-Gurmukhi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Lato' (Lato-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Padauk' (Padauk-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Liberation Mono' (LiberationMono-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Samyak Devanagari' (Samyak-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Rachana' (Rachana-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'P052' (P052-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Regular.otf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,829   findfont: score(<Font 'Rasa' (Rasa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,829   findfont: score(<Font 'Yrsa' (Yrsa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Lato' (Lato-HairlineItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,829   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'Ani' (ani.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Norasi' (Norasi-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'FreeSans' (FreeSans.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'URW Bookman' (URWBookman-Light.otf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,830   findfont: score(<Font 'Pagul' (Pagul.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'stmary10' (stmary10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Tlwg Typist' (TlwgTypist.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'KacstScreen' (KacstScreen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'URW Gothic' (URWGothic-BookOblique.otf) oblique normal book normal>) = 11.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Tlwg Mono' (TlwgMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'Kinnari' (Kinnari-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'D050000L' (D050000L.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Kinnari' (Kinnari-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'FreeMono' (FreeMonoBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'Umpush' (Umpush-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'Liberation Mono' (LiberationMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Umpush' (Umpush-LightOblique.ttf) oblique normal light normal>) = 11.24
+2024-12-19 11:47:13,830   findfont: score(<Font 'padmaa-Bold.1.1' (padmaa-Bold.1.1.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'Lato' (Lato-Heavy.ttf) normal normal heavy normal>) = 10.43
+2024-12-19 11:47:13,830   findfont: score(<Font 'Keraleeyam' (Keraleeyam-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,830   findfont: score(<Font 'Manjari' (Manjari-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,830   findfont: score(<Font 'Garuda' (Garuda-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'Loma' (Loma-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'wasy10' (wasy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Bitstream Vera Serif' (VeraSeBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'OpenSymbol' (opens___.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'Bitstream Vera Sans' (Vera.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-BoldItalic.ttf) italic normal bold condensed>) = 11.535
+2024-12-19 11:47:13,831   findfont: score(<Font 'Lohit Devanagari' (Lohit-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'rsfs10' (rsfs10.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Regular.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,831   findfont: score(<Font 'Lato' (Lato-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Lato' (Lato-SemiboldItalic.ttf) italic normal semibold normal>) = 11.24
+2024-12-19 11:47:13,831   findfont: score(<Font 'Ubuntu' (Ubuntu-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Kalapi' (Kalapi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Mukti Narrow' (MuktiNarrowBold.ttf) normal normal 700 normal>) = 10.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'C059' (C059-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'msbm10' (msbm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'Nimbus Sans' (NimbusSans-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'Garuda' (Garuda-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,831   findfont: score(<Font 'Loma' (Loma-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'KacstDigital' (KacstDigital.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,831   findfont: score(<Font 'KacstTitle' (KacstTitle.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'FreeSerif' (FreeSerifBoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,832   findfont: score(<Font 'Ubuntu' (Ubuntu-MI.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,832   findfont: score(<Font 'URW Gothic' (URWGothic-DemiOblique.otf) oblique normal demi normal>) = 11.24
+2024-12-19 11:47:13,832   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Oblique.otf) oblique normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,832   findfont: score(<Font 'padmaa' (padmaa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Purisa' (Purisa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Yrsa' (Yrsa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,832   findfont: score(<Font 'Bitstream Vera Serif' (VeraSe.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'mry_KacstQurn' (mry_KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'KacstLetter' (KacstLetter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'KacstDecorative' (KacstDecorative.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Samyak Tamil' (Samyak-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Lato' (Lato-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Padauk' (Padauk-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,832   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,832   findfont: score(<Font 'Waree' (Waree.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'Kinnari' (Kinnari-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,832   findfont: Font family ['arial'] not found. Falling back to DejaVu Sans.
+2024-12-19 11:47:13,832   findfont: Matching DejaVu Sans:style=normal:variant=normal:weight=normal:stretch=normal:size=8.4.
+2024-12-19 11:47:13,832   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 1.05
+2024-12-19 11:47:13,832   findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,832   findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 0.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 0.33499999999999996
+2024-12-19 11:47:13,833   findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,833   findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 1.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'Gargi' (Gargi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'FreeMono' (FreeMonoBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'C059' (C059-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,834   findfont: score(<Font 'Navilu' (Navilu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'C059' (C059-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'Rekha' (Rekha.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'Vemana2000' (vemana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'Waree' (Waree-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'URW Bookman' (URWBookman-DemiItalic.otf) italic normal book normal>) = 11.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,834   findfont: score(<Font 'URW Bookman' (URWBookman-LightItalic.otf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,834   findfont: score(<Font 'Waree' (Waree-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,834   findfont: score(<Font 'Yrsa' (Yrsa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,834   findfont: score(<Font 'Norasi' (Norasi-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'Tlwg Typo' (TlwgTypo.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Chandas' (chandas1-2.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Khmer OS System' (KhmerOSsys.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'AnjaliOldLipi' (AnjaliOldLipi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'P052' (P052-Roman.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,835   findfont: score(<Font 'KacstOne' (KacstOne.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Italic.ttf) italic normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,835   findfont: score(<Font 'Lohit Malayalam' (Lohit-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Mitra Mono' (mitra.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Khmer OS' (KhmerOS.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Yrsa' (Yrsa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,835   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'KacstOne' (KacstOne-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'Kinnari' (Kinnari-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'Ubuntu Condensed' (Ubuntu-C.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,835   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Bold.otf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,835   findfont: score(<Font 'Umpush' (Umpush-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'Nakula' (nakula.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'C059' (C059-BdIta.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'Phetsarath OT' (Phetsarath_OT.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,835   findfont: score(<Font 'Bitstream Vera Sans' (VeraBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,835   findfont: score(<Font 'Gayathri' (Gayathri-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,836   findfont: score(<Font 'Kinnari' (Kinnari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Kalimati' (kalimati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Lato' (Lato-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,836   findfont: score(<Font 'Abyssinica SIL' (AbyssinicaSIL-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Samyak Malayalam' (Samyak-Malayalam.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Saab' (Saab.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'KacstPoster' (KacstPoster.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'KacstTitleL' (KacstTitleL.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'KacstArt' (KacstArt.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'KacstNaskh' (KacstNaskh.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Lato' (Lato-ThinItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Garuda' (Garuda-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Purisa' (Purisa-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Ubuntu' (Ubuntu-Th.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Lohit Bengali' (Lohit-Bengali.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'RaghuMalayalamSans' (RaghuMalayalamSans-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Norasi' (Norasi-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,836   findfont: score(<Font 'Lohit Odia' (Lohit-Odia.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Bitstream Vera Sans' (VeraBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,836   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,836   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Regular.ttf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,836   findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Lato' (Lato-Thin.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Garuda' (Garuda.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,836   findfont: score(<Font 'Purisa' (Purisa-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'Liberation Sans' (LiberationSans-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-BoldItalic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,837   findfont: score(<Font 'Lohit Tamil Classical' (Lohit-Tamil-Classical.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Likhan' (LikhanNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'Mukti Narrow' (MuktiNarrow.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Sawasdee' (Sawasdee-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Liberation Sans' (LiberationSans-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'Rasa' (Rasa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Lato' (Lato-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'KacstOffice' (KacstOffice.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Laksaman' (Laksaman.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'FreeMono' (FreeMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Gayathri' (Gayathri-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Sarai' (Sarai.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'Lato' (Lato-HeavyItalic.ttf) italic normal heavy normal>) = 11.43
+2024-12-19 11:47:13,837   findfont: score(<Font 'Ubuntu' (Ubuntu-B.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,837   findfont: score(<Font 'Lato' (Lato-MediumItalic.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,837   findfont: score(<Font 'Tibetan Machine Uni' (TibetanMachineUni.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Jamrul' (JamrulNormal.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,837   findfont: score(<Font 'Norasi' (Norasi-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,838   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Standard Symbols PS' (StandardSymbolsPS.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Loma' (Loma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Waree' (Waree-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,838   findfont: score(<Font 'Norasi' (Norasi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Rasa' (Rasa-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,838   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-Bold.ttf) normal normal bold condensed>) = 10.535
+2024-12-19 11:47:13,838   findfont: score(<Font 'Tlwg Mono' (TlwgMono.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Liberation Serif' (LiberationSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,838   findfont: score(<Font 'Ubuntu' (Ubuntu-M.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,838   findfont: score(<Font 'Ubuntu Mono' (UbuntuMono-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Laksaman' (Laksaman-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'FreeSans' (FreeSansBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,838   findfont: score(<Font 'Lato' (Lato-BlackItalic.ttf) italic normal black normal>) = 11.525
+2024-12-19 11:47:13,838   findfont: score(<Font 'esint10' (esint10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Z003' (Z003-MediumItalic.otf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,838   findfont: score(<Font 'Lohit Assamese' (Lohit-Assamese.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Lohit Telugu' (Lohit-Telugu.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'msam10' (msam10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,838   findfont: score(<Font 'eufm10' (eufm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Liberation Mono' (LiberationMono-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,838   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,838   findfont: score(<Font 'Umpush' (Umpush-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'FreeSans' (FreeSansOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'URW Bookman' (URWBookman-Demi.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Bitstream Vera Sans' (VeraIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'KacstBook' (KacstBook.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'KacstQurn' (KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Sawasdee' (Sawasdee-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'ori1Uni' (utkal.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,839   findfont: score(<Font 'FreeSerif' (FreeSerif.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Karumbi' (Karumbi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'P052' (P052-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'Samanata' (samanata.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'FreeSans' (FreeSansBoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'padmaa' (padmaa-Medium-0.5.ttf) normal normal normal normal>) = 10.0
+2024-12-19 11:47:13,839   findfont: score(<Font 'Lato' (Lato-LightItalic.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,839   findfont: score(<Font 'Ubuntu' (Ubuntu-BI.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'Lato' (Lato-Semibold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,839   findfont: score(<Font 'Samyak Gujarati' (Samyak-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Liberation Sans' (LiberationSans-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoBI.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'Purisa' (Purisa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'FreeMono' (FreeMonoOblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,839   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,839   findfont: score(<Font 'Yrsa' (Yrsa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'Gubbi' (Gubbi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Padauk Book' (PadaukBook-Bold.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Umpush' (Umpush.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'KacstFarsi' (KacstFarsi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Manjari' (Manjari-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Suruma' (Suruma.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Rasa' (Rasa-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'URW Gothic' (URWGothic-Demi.otf) normal normal demi normal>) = 10.24
+2024-12-19 11:47:13,840   findfont: score(<Font 'Lohit Tamil' (Lohit-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Loma' (Loma-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'FreeSerif' (FreeSerifItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Sawasdee' (Sawasdee.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Liberation Sans' (LiberationSans-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'Ubuntu' (Ubuntu-RI.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'Laksaman' (Laksaman-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'KacstPen' (KacstPen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Meera' (Meera-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Tlwg Typewriter' (TlwgTypewriter-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Italic.otf) italic normal roman normal>) = 11.145
+2024-12-19 11:47:13,840   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,840   findfont: score(<Font 'Padauk Book' (PadaukBook-Regular.ttf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,840   findfont: score(<Font 'Umpush' (Umpush-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,840   findfont: score(<Font 'Laksaman' (Laksaman-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,841   findfont: score(<Font 'LKLUG' (lklug.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Norasi' (Norasi-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,841   findfont: score(<Font 'Gayathri' (Gayathri-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Rachana' (Rachana-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,841   findfont: score(<Font 'Ubuntu' (Ubuntu-LI.ttf) italic normal light normal>) = 11.24
+2024-12-19 11:47:13,841   findfont: score(<Font 'FreeSerif' (FreeSerifBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,841   findfont: score(<Font 'Rasa' (Rasa-Light.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,841   findfont: score(<Font 'Sahadeva' (sahadeva.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Manjari' (Manjari-Thin.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Lato' (Lato-Medium.ttf) normal normal medium normal>) = 10.145
+2024-12-19 11:47:13,841   findfont: score(<Font 'Kinnari' (Kinnari-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'aakar' (aakar-medium.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Lohit Kannada' (Lohit-Kannada.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Lato' (Lato-Black.ttf) normal normal black normal>) = 10.525
+2024-12-19 11:47:13,841   findfont: score(<Font 'Tlwg Mono' (TlwgMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Chilanka' (Chilanka-Regular.otf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Noto Serif CJK JP' (NotoSerifCJK-Regular.ttc) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Lohit Gujarati' (Lohit-Gujarati.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Dyuthi' (Dyuthi-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'P052' (P052-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,841   findfont: score(<Font 'Ubuntu' (Ubuntu-L.ttf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,841   findfont: score(<Font 'URW Gothic' (URWGothic-Book.otf) normal normal book normal>) = 10.05
+2024-12-19 11:47:13,841   findfont: score(<Font 'Sawasdee' (Sawasdee-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,842   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-BoldOblique.otf) oblique normal bold condensed>) = 11.535
+2024-12-19 11:47:13,842   findfont: score(<Font 'Uroob' (Uroob-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Bold.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,842   findfont: score(<Font 'Liberation Mono' (LiberationMono-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,842   findfont: score(<Font 'Lato' (Lato-Hairline.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Lohit Gurmukhi' (Lohit-Gurmukhi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Lato' (Lato-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Padauk' (Padauk-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Liberation Mono' (LiberationMono-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Samyak Devanagari' (Samyak-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Rachana' (Rachana-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'P052' (P052-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Regular.otf) normal normal 400 condensed>) = 10.25
+2024-12-19 11:47:13,842   findfont: score(<Font 'Rasa' (Rasa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,842   findfont: score(<Font 'Yrsa' (Yrsa-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Lato' (Lato-HairlineItalic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Tlwg Typo' (TlwgTypo-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,842   findfont: score(<Font 'Ani' (ani.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Bitstream Vera Sans Mono' (VeraMoIt.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'Norasi' (Norasi-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'FreeSans' (FreeSans.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'URW Bookman' (URWBookman-Light.otf) normal normal light normal>) = 10.24
+2024-12-19 11:47:13,842   findfont: score(<Font 'Pagul' (Pagul.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,842   findfont: score(<Font 'stmary10' (stmary10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Tlwg Typist' (TlwgTypist.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'KacstScreen' (KacstScreen.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'URW Gothic' (URWGothic-BookOblique.otf) oblique normal book normal>) = 11.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Tlwg Mono' (TlwgMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Kinnari' (Kinnari-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'D050000L' (D050000L.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Kinnari' (Kinnari-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'FreeMono' (FreeMonoBold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Umpush' (Umpush-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Liberation Mono' (LiberationMono-Regular.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Umpush' (Umpush-LightOblique.ttf) oblique normal light normal>) = 11.24
+2024-12-19 11:47:13,843   findfont: score(<Font 'padmaa-Bold.1.1' (padmaa-Bold.1.1.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Lato' (Lato-Heavy.ttf) normal normal heavy normal>) = 10.43
+2024-12-19 11:47:13,843   findfont: score(<Font 'Keraleeyam' (Keraleeyam-Regular.ttf) normal normal regular normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Manjari' (Manjari-Bold.otf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Garuda' (Garuda-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Loma' (Loma-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'wasy10' (wasy10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Bitstream Vera Serif' (VeraSeBd.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'OpenSymbol' (opens___.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Liberation Serif' (LiberationSerif-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,843   findfont: score(<Font 'Bitstream Vera Sans' (Vera.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,843   findfont: score(<Font 'Liberation Sans Narrow' (LiberationSansNarrow-BoldItalic.ttf) italic normal bold condensed>) = 11.535
+2024-12-19 11:47:13,844   findfont: score(<Font 'Lohit Devanagari' (Lohit-Devanagari.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'rsfs10' (rsfs10.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Nimbus Roman' (NimbusRoman-Regular.otf) normal normal roman normal>) = 10.145
+2024-12-19 11:47:13,844   findfont: score(<Font 'Lato' (Lato-BoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,844   findfont: score(<Font 'Nimbus Mono PS' (NimbusMonoPS-Regular.otf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Lato' (Lato-SemiboldItalic.ttf) italic normal semibold normal>) = 11.24
+2024-12-19 11:47:13,844   findfont: score(<Font 'Ubuntu' (Ubuntu-R.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Kalapi' (Kalapi.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Mukti Narrow' (MuktiNarrowBold.ttf) normal normal 700 normal>) = 10.335
+2024-12-19 11:47:13,844   findfont: score(<Font 'C059' (C059-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'msbm10' (msbm10.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Noto Sans CJK JP' (NotoSansCJK-Bold.ttc) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,844   findfont: score(<Font 'Nimbus Sans' (NimbusSans-BoldItalic.otf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,844   findfont: score(<Font 'Garuda' (Garuda-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+2024-12-19 11:47:13,844   findfont: score(<Font 'Loma' (Loma-Oblique.ttf) oblique normal 400 normal>) = 11.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'KacstDigital' (KacstDigital.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'KacstTitle' (KacstTitle.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'FreeSerif' (FreeSerifBoldItalic.ttf) italic normal bold normal>) = 11.335
+2024-12-19 11:47:13,844   findfont: score(<Font 'Ubuntu' (Ubuntu-MI.ttf) italic normal medium normal>) = 11.145
+2024-12-19 11:47:13,844   findfont: score(<Font 'URW Gothic' (URWGothic-DemiOblique.otf) oblique normal demi normal>) = 11.24
+2024-12-19 11:47:13,844   findfont: score(<Font 'Nimbus Sans Narrow' (NimbusSansNarrow-Oblique.otf) oblique normal 400 condensed>) = 11.25
+2024-12-19 11:47:13,844   findfont: score(<Font 'padmaa' (padmaa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Purisa' (Purisa.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,844   findfont: score(<Font 'Yrsa' (Yrsa-SemiBold.ttf) normal normal semibold normal>) = 10.24
+2024-12-19 11:47:13,844   findfont: score(<Font 'Bitstream Vera Serif' (VeraSe.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'mry_KacstQurn' (mry_KacstQurn.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'Nimbus Sans' (NimbusSans-Italic.otf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'KacstLetter' (KacstLetter.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'KacstDecorative' (KacstDecorative.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'Samyak Tamil' (Samyak-Tamil.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'Lato' (Lato-Italic.ttf) italic normal 400 normal>) = 11.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'Padauk' (Padauk-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,845   findfont: score(<Font 'Tlwg Typist' (TlwgTypist-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,845   findfont: score(<Font 'Waree' (Waree.ttf) normal normal 400 normal>) = 10.05
+2024-12-19 11:47:13,845   findfont: score(<Font 'Kinnari' (Kinnari-Bold.ttf) normal normal bold normal>) = 10.335
+2024-12-19 11:47:13,845   findfont: Matching DejaVu Sans:style=normal:variant=normal:weight=normal:stretch=normal:size=8.4 to DejaVu Sans ('/home/vs/anaconda3/envs/my_env/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2024-12-19 11:47:15,266   title position was updated manually, not adjusting
+2024-12-19 11:47:15,331   title position was updated manually, not adjusting
+2024-12-19 11:47:15,400   title position was updated manually, not adjusting
+2024-12-19 11:47:15,473   title position was updated manually, not adjusting
+2024-12-19 11:47:15,543   title position was updated manually, not adjusting
+2024-12-19 11:47:15,614   title position was updated manually, not adjusting
+2024-12-19 11:47:15,686   title position was updated manually, not adjusting
+2024-12-19 11:47:15,755   title position was updated manually, not adjusting
+2024-12-19 11:47:15,825   title position was updated manually, not adjusting
+2024-12-19 11:47:15,900   title position was updated manually, not adjusting
+2024-12-19 11:47:15,972   title position was updated manually, not adjusting
+2024-12-19 11:47:16,042   title position was updated manually, not adjusting
+2024-12-19 11:47:16,112   title position was updated manually, not adjusting
+2024-12-19 11:47:16,182   title position was updated manually, not adjusting
+2024-12-19 11:47:16,252   title position was updated manually, not adjusting
+2024-12-19 11:47:16,324   title position was updated manually, not adjusting
+2024-12-19 11:47:16,395   title position was updated manually, not adjusting
+2024-12-19 11:47:16,465   title position was updated manually, not adjusting
+2024-12-19 11:47:16,536   title position was updated manually, not adjusting
+2024-12-19 11:47:16,606   title position was updated manually, not adjusting
+2024-12-19 11:47:16,676   title position was updated manually, not adjusting
+2024-12-19 11:47:16,747   title position was updated manually, not adjusting
+2024-12-19 11:47:16,819   title position was updated manually, not adjusting
+2024-12-19 11:47:16,890   title position was updated manually, not adjusting
+2024-12-19 11:47:16,960   title position was updated manually, not adjusting
+2024-12-19 11:47:17,038   title position was updated manually, not adjusting
+2024-12-19 11:47:17,109   title position was updated manually, not adjusting
+2024-12-19 11:47:17,236   title position was updated manually, not adjusting
+2024-12-19 11:47:17,307   title position was updated manually, not adjusting
+2024-12-19 11:47:17,378   title position was updated manually, not adjusting
+2024-12-19 11:47:17,449   title position was updated manually, not adjusting
+2024-12-19 11:47:17,520   title position was updated manually, not adjusting
+2024-12-19 11:47:17,592   title position was updated manually, not adjusting
+2024-12-19 11:47:17,694   title position was updated manually, not adjusting
+2024-12-19 11:47:17,770   title position was updated manually, not adjusting
+2024-12-19 11:47:17,841   title position was updated manually, not adjusting
+2024-12-19 11:47:17,912   title position was updated manually, not adjusting
+2024-12-19 11:47:18,217   title position was updated manually, not adjusting
+2024-12-19 11:47:18,286   title position was updated manually, not adjusting
+2024-12-19 11:47:18,358   title position was updated manually, not adjusting
+2024-12-19 11:47:18,428   title position was updated manually, not adjusting
+2024-12-19 11:47:18,499   title position was updated manually, not adjusting
+2024-12-19 11:47:18,571   title position was updated manually, not adjusting
+2024-12-19 11:47:18,643   title position was updated manually, not adjusting
+2024-12-19 11:47:18,714   title position was updated manually, not adjusting
+2024-12-19 11:47:18,784   title position was updated manually, not adjusting
+2024-12-19 11:47:18,853   title position was updated manually, not adjusting
+2024-12-19 11:47:18,923   title position was updated manually, not adjusting
+2024-12-19 11:47:18,994   title position was updated manually, not adjusting
+2024-12-19 11:47:19,062   title position was updated manually, not adjusting
+2024-12-19 11:47:19,132   title position was updated manually, not adjusting
+2024-12-19 11:47:19,201   title position was updated manually, not adjusting
+2024-12-19 11:47:19,269   title position was updated manually, not adjusting
+2024-12-19 11:47:19,337   title position was updated manually, not adjusting
+2024-12-19 11:47:19,452   title position was updated manually, not adjusting
+2024-12-19 11:47:19,521   title position was updated manually, not adjusting
+2024-12-19 11:47:19,589   title position was updated manually, not adjusting
+2024-12-19 11:47:19,658   title position was updated manually, not adjusting
+2024-12-19 11:47:19,725   title position was updated manually, not adjusting
+2024-12-19 11:47:19,793   title position was updated manually, not adjusting
+2024-12-19 11:47:19,861   title position was updated manually, not adjusting
+2024-12-19 11:47:19,931   title position was updated manually, not adjusting
+2024-12-19 11:47:20,004   title position was updated manually, not adjusting
+2024-12-19 11:47:20,075   title position was updated manually, not adjusting
+2024-12-19 11:47:20,145   title position was updated manually, not adjusting
+2024-12-19 11:47:20,217   title position was updated manually, not adjusting
+2024-12-19 11:47:20,290   title position was updated manually, not adjusting
+2024-12-19 11:47:20,361   title position was updated manually, not adjusting
+2024-12-19 11:47:20,432   title position was updated manually, not adjusting
+2024-12-19 11:47:20,504   title position was updated manually, not adjusting
+2024-12-19 11:47:20,576   title position was updated manually, not adjusting
+2024-12-19 11:47:20,651   title position was updated manually, not adjusting
+2024-12-19 11:47:20,724   title position was updated manually, not adjusting
+2024-12-19 11:47:20,795   title position was updated manually, not adjusting
+2024-12-19 11:47:20,866   title position was updated manually, not adjusting
+2024-12-19 11:47:20,940   title position was updated manually, not adjusting
+2024-12-19 11:47:21,013   title position was updated manually, not adjusting
+2024-12-19 11:47:21,083   title position was updated manually, not adjusting
+2024-12-19 11:47:21,156   title position was updated manually, not adjusting
+2024-12-19 11:47:21,534   title position was updated manually, not adjusting
+2024-12-19 11:47:21,604   title position was updated manually, not adjusting
+2024-12-19 11:47:21,675   title position was updated manually, not adjusting
+2024-12-19 11:47:21,744   title position was updated manually, not adjusting
+2024-12-19 11:47:21,816   title position was updated manually, not adjusting
+2024-12-19 11:47:21,913   title position was updated manually, not adjusting
+2024-12-19 11:47:22,009   title position was updated manually, not adjusting
+2024-12-19 11:47:22,097   title position was updated manually, not adjusting
+2024-12-19 11:47:22,167   title position was updated manually, not adjusting
+2024-12-19 11:47:22,240   title position was updated manually, not adjusting
+2024-12-19 11:47:22,312   title position was updated manually, not adjusting
+2024-12-19 11:47:22,384   title position was updated manually, not adjusting
+2024-12-19 11:47:22,458   title position was updated manually, not adjusting
+2024-12-19 11:47:22,614   title position was updated manually, not adjusting
+2024-12-19 11:47:22,686   title position was updated manually, not adjusting
+2024-12-19 11:47:22,762   title position was updated manually, not adjusting
+2024-12-19 11:47:22,837   title position was updated manually, not adjusting
+2024-12-19 11:47:22,928   title position was updated manually, not adjusting
+2024-12-19 11:47:23,009   title position was updated manually, not adjusting

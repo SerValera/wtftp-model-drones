@@ -1,0 +1,409 @@
+2024-12-19 12:39:07,502   
+
+
+
+
+
+
+
+
+
+---------Beginning of the training epoch----------
+2024-12-19 12:39:07,502   ------------------TRAIN DETAILS-------------------
+training on device cpu...
+minibatch_len: 10
+interval: 1
+batch_size: 64
+epoch: 40
+lr: 0.0002
+dpot: 0.0
+cpu: False
+nologging: False
+logdir: ./log
+datadir: ./data
+bidirectional: False
+saving_model_num: 1
+debug: False
+maxlevel: 2
+wavelet: haar
+L2details: False
+wt_mode: symmetric
+w_spatial: 0.0
+w_lo: 1.0
+w_hi: 1.0
+enlayer: 4
+delayer: 1
+embding: 64
+attn: False
+comments: 
+cuda: 0
+------------------MODEL DETAILS-------------------
+self: WTFTP_AttnRemoved(
+  (inp_embding): Sequential(
+    (0): Embed(
+      (embed): Linear(in_features=6, out_features=32, bias=False)
+    )
+    (1): ReLU()
+    (2): Embed(
+      (embed): Linear(in_features=32, out_features=64, bias=False)
+    )
+    (3): ReLU()
+  )
+  (encoder): LSTM(64, 64, num_layers=4, bias=False, batch_first=True)
+  (decoders): ModuleList(
+    (0-2): 3 x LSTM(64, 64, bias=False, batch_first=True)
+  )
+  (LNs): ModuleList(
+    (0-2): 3 x LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  )
+  (oup_embdings): ModuleList(
+    (0-2): 3 x Embed(
+      (embed): Linear(in_features=64, out_features=6, bias=True)
+    )
+  )
+)
+n_inp: 6
+n_encoderLayers: 4
+activation: relu
+maxlevel: 2
+en_dropout: 0.0
+steps: None
+de_dropout: 0.0
+n_decoderLayers: 1
+n_embding: 64
+n_oup: 6
+proj: linear
+__class__: <class 'model.WTFTP_AttnRemoved'>
+train_opt: Namespace(L2details=False, attn=False, batch_size=64, bidirectional=False, comments='', cpu=False, cuda=0, datadir='./data', debug=False, delayer=1, dpot=0.0, embding=64, enlayer=4, epoch=40, interval=1, logdir='./log', lr=0.0002, maxlevel=2, minibatch_len=10, nologging=False, saving_model_num=1, w_hi=1.0, w_lo=1.0, w_spatial=0.0, wavelet='haar', wt_mode='symmetric')
+
+2024-12-19 12:39:07,502   
+--------------------Epoch 1/40--------------------
+2024-12-19 12:39:07,555   0/199 train_loss(scaled): 6.68331146, temporal_loss: 1.65678465, freq_loss: 6.68331146
+2024-12-19 12:39:11,404   199/199 train_loss(scaled): 0.12321506, temporal_loss: 0.03093170, freq_loss: 0.12321506
+2024-12-19 12:39:11,405   ave_train_loss: 2.69683759, ave_temporal_loss: 0.67147387, ave_freq_loss: 2.69683759
+2024-12-19 12:39:11,564   Evaluation-Stage:
+aveMSE(scaled): 0.04147641, in each attr(RMSE, unscaled): {'lon': 0.4723493982924401, 'lat': 0.2544139041955784, 'alt': 0.01200721761058853, 'spdx': 1.0297511797419174, 'spdy': 1.1093724210467384, 'spdz': 0.06778934413020064}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.41109201312065125, 'lat': 0.2320568561553955, 'alt': 0.009273898787796497, 'spdx': 0.8174227476119995, 'spdy': 0.8488554954528809, 'spdz': 0.050016891211271286}
+2024-12-19 12:39:11,565   
+--------------------Epoch 2/40--------------------
+2024-12-19 12:39:11,584   0/199 train_loss(scaled): 1.73241329, temporal_loss: 0.43283758, freq_loss: 1.73241329
+2024-12-19 12:39:15,315   199/199 train_loss(scaled): 0.01064936, temporal_loss: 0.00272534, freq_loss: 0.01064936
+2024-12-19 12:39:15,315   ave_train_loss: 1.12621362, ave_temporal_loss: 0.28163984, ave_freq_loss: 1.12621362
+2024-12-19 12:39:15,464   Evaluation-Stage:
+aveMSE(scaled): 0.01985769, in each attr(RMSE, unscaled): {'lon': 0.188486909335261, 'lat': 0.21143965642564058, 'alt': 0.011126210530594307, 'spdx': 0.825734990176676, 'spdy': 0.8430711699905412, 'spdz': 0.056270928181816414}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.15783298015594482, 'lat': 0.1807996928691864, 'alt': 0.007942971773445606, 'spdx': 0.6506390571594238, 'spdy': 0.567181408405304, 'spdz': 0.03624255210161209}
+2024-12-19 12:39:15,464   
+--------------------Epoch 3/40--------------------
+2024-12-19 12:39:15,481   0/199 train_loss(scaled): 0.48918432, temporal_loss: 0.12225115, freq_loss: 0.48918432
+2024-12-19 12:39:18,783   199/199 train_loss(scaled): 0.41330111, temporal_loss: 0.10326092, freq_loss: 0.41330111
+2024-12-19 12:39:18,783   ave_train_loss: 0.46951166, ave_temporal_loss: 0.11765812, ave_freq_loss: 0.46951166
+2024-12-19 12:39:18,943   Evaluation-Stage:
+aveMSE(scaled): 0.01822744, in each attr(RMSE, unscaled): {'lon': 0.1769824628951466, 'lat': 0.19844598113731626, 'alt': 0.010036931377018598, 'spdx': 0.7872932162593045, 'spdy': 0.8171314140022574, 'spdz': 0.05682085605648775}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.14238999783992767, 'lat': 0.16349147260189056, 'alt': 0.0069739981554448605, 'spdx': 0.6184974908828735, 'spdy': 0.5473819375038147, 'spdz': 0.036473989486694336}
+2024-12-19 12:39:18,944   
+--------------------Epoch 4/40--------------------
+2024-12-19 12:39:18,962   0/199 train_loss(scaled): 0.35602871, temporal_loss: 0.08877621, freq_loss: 0.35602871
+2024-12-19 12:39:22,310   199/199 train_loss(scaled): 1.45323110, temporal_loss: 0.43819842, freq_loss: 1.45323110
+2024-12-19 12:39:22,311   ave_train_loss: 0.15227013, ave_temporal_loss: 0.03862534, ave_freq_loss: 0.15227013
+2024-12-19 12:39:22,460   Evaluation-Stage:
+aveMSE(scaled): 0.01688869, in each attr(RMSE, unscaled): {'lon': 0.17701003483705074, 'lat': 0.1826843505402579, 'alt': 0.012851139869849815, 'spdx': 0.6822451558652275, 'spdy': 0.7651084792446458, 'spdz': 0.056522637007659596}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.13851869106292725, 'lat': 0.1474398374557495, 'alt': 0.009870627894997597, 'spdx': 0.5026789307594299, 'spdy': 0.4964309632778168, 'spdz': 0.03616857901215553}
+2024-12-19 12:39:22,461   
+--------------------Epoch 5/40--------------------
+2024-12-19 12:39:22,479   0/199 train_loss(scaled): 0.08501824, temporal_loss: 0.02104739, freq_loss: 0.08501824
+2024-12-19 12:39:25,872   199/199 train_loss(scaled): 1.25196862, temporal_loss: 0.36040455, freq_loss: 1.25196862
+2024-12-19 12:39:25,873   ave_train_loss: 0.04603492, ave_temporal_loss: 0.01189545, ave_freq_loss: 0.04603492
+2024-12-19 12:39:26,036   Evaluation-Stage:
+aveMSE(scaled): 0.01427615, in each attr(RMSE, unscaled): {'lon': 0.16597754097728898, 'lat': 0.17443004077884658, 'alt': 0.011684829326059139, 'spdx': 0.5853811547401578, 'spdy': 0.6880046336259167, 'spdz': 0.05459515830632561}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.1272955983877182, 'lat': 0.14149339497089386, 'alt': 0.00925790797919035, 'spdx': 0.4131448268890381, 'spdy': 0.41632720828056335, 'spdz': 0.03482693061232567}
+2024-12-19 12:39:26,037   
+--------------------Epoch 6/40--------------------
+2024-12-19 12:39:26,054   0/199 train_loss(scaled): 0.01910040, temporal_loss: 0.00487994, freq_loss: 0.01910040
+2024-12-19 12:39:29,387   199/199 train_loss(scaled): 0.00325619, temporal_loss: 0.00089805, freq_loss: 0.00325619
+2024-12-19 12:39:29,387   ave_train_loss: 0.01873009, ave_temporal_loss: 0.00494142, ave_freq_loss: 0.01873009
+2024-12-19 12:39:29,535   Evaluation-Stage:
+aveMSE(scaled): 0.01114350, in each attr(RMSE, unscaled): {'lon': 0.1441171681305926, 'lat': 0.1626166369840974, 'alt': 0.006165923600726771, 'spdx': 0.48973523144071573, 'spdy': 0.6298324209948424, 'spdz': 0.05447197705115902}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.110334113240242, 'lat': 0.13052257895469666, 'alt': 0.004443899728357792, 'spdx': 0.3292466998100281, 'spdy': 0.36637017130851746, 'spdz': 0.03462054580450058}
+2024-12-19 12:39:29,536   
+--------------------Epoch 7/40--------------------
+2024-12-19 12:39:29,553   0/199 train_loss(scaled): 0.09343089, temporal_loss: 0.02788516, freq_loss: 0.09343089
+2024-12-19 12:39:32,843   199/199 train_loss(scaled): 0.00187475, temporal_loss: 0.00051981, freq_loss: 0.00187475
+2024-12-19 12:39:32,843   ave_train_loss: 0.01236347, ave_temporal_loss: 0.00331644, ave_freq_loss: 0.01236347
+2024-12-19 12:39:32,994   Evaluation-Stage:
+aveMSE(scaled): 0.00996286, in each attr(RMSE, unscaled): {'lon': 0.13484321654911544, 'lat': 0.15295113014933476, 'alt': 0.005047461846061709, 'spdx': 0.45302187634059504, 'spdy': 0.6092214880052841, 'spdz': 0.052286152767820886}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.10230022668838501, 'lat': 0.121602363884449, 'alt': 0.0036667706444859505, 'spdx': 0.29541465640068054, 'spdy': 0.3410922586917877, 'spdz': 0.03219669312238693}
+2024-12-19 12:39:32,994   
+--------------------Epoch 8/40--------------------
+2024-12-19 12:39:33,012   0/199 train_loss(scaled): 0.00377981, temporal_loss: 0.00096070, freq_loss: 0.00377981
+2024-12-19 12:39:36,334   199/199 train_loss(scaled): 0.00471501, temporal_loss: 0.00157536, freq_loss: 0.00471501
+2024-12-19 12:39:36,334   ave_train_loss: 0.01128104, ave_temporal_loss: 0.00305559, ave_freq_loss: 0.01128104
+2024-12-19 12:39:36,482   Evaluation-Stage:
+aveMSE(scaled): 0.00907942, in each attr(RMSE, unscaled): {'lon': 0.12159332161687969, 'lat': 0.14314860043159636, 'alt': 0.005972675480146587, 'spdx': 0.4111545402965065, 'spdy': 0.5816190399202321, 'spdz': 0.05153035621376885}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.09204646944999695, 'lat': 0.1122903972864151, 'alt': 0.004220219328999519, 'spdx': 0.2530679702758789, 'spdy': 0.32034164667129517, 'spdz': 0.03158034756779671}
+2024-12-19 12:39:36,482   
+--------------------Epoch 9/40--------------------
+2024-12-19 12:39:36,499   0/199 train_loss(scaled): 0.00452418, temporal_loss: 0.00138832, freq_loss: 0.00452418
+2024-12-19 12:39:39,879   199/199 train_loss(scaled): 0.00193624, temporal_loss: 0.00055386, freq_loss: 0.00193624
+2024-12-19 12:39:39,879   ave_train_loss: 0.01067225, ave_temporal_loss: 0.00290739, ave_freq_loss: 0.01067225
+2024-12-19 12:39:40,029   Evaluation-Stage:
+aveMSE(scaled): 0.00844979, in each attr(RMSE, unscaled): {'lon': 0.11427904812003589, 'lat': 0.13659498880139223, 'alt': 0.005244608411246354, 'spdx': 0.3886557340864668, 'spdy': 0.5685440497548206, 'spdz': 0.051021479954139075}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.08533982187509537, 'lat': 0.10737854987382889, 'alt': 0.0036896727979183197, 'spdx': 0.22937963902950287, 'spdy': 0.30821260809898376, 'spdz': 0.03074348159134388}
+2024-12-19 12:39:40,030   
+-------------------Epoch 10/40--------------------
+2024-12-19 12:39:40,048   0/199 train_loss(scaled): 0.00331798, temporal_loss: 0.00085425, freq_loss: 0.00331798
+2024-12-19 12:39:43,432   199/199 train_loss(scaled): 0.00393436, temporal_loss: 0.00090540, freq_loss: 0.00393436
+2024-12-19 12:39:43,432   ave_train_loss: 0.01021452, ave_temporal_loss: 0.00280151, ave_freq_loss: 0.01021452
+2024-12-19 12:39:43,602   Evaluation-Stage:
+aveMSE(scaled): 0.00784496, in each attr(RMSE, unscaled): {'lon': 0.10452740067007475, 'lat': 0.12631506869494488, 'alt': 0.005017668758530969, 'spdx': 0.36586120181428944, 'spdy': 0.5626557717272276, 'spdz': 0.05035957767964789}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.07722117006778717, 'lat': 0.09694616496562958, 'alt': 0.0037745048757642508, 'spdx': 0.20584522187709808, 'spdy': 0.2960556447505951, 'spdz': 0.03032008372247219}
+2024-12-19 12:39:43,603   
+-------------------Epoch 11/40--------------------
+2024-12-19 12:39:43,620   0/199 train_loss(scaled): 0.00518932, temporal_loss: 0.00153186, freq_loss: 0.00518932
+2024-12-19 12:39:46,967   199/199 train_loss(scaled): 0.00269294, temporal_loss: 0.00065520, freq_loss: 0.00269294
+2024-12-19 12:39:46,967   ave_train_loss: 0.00991687, ave_temporal_loss: 0.00272494, ave_freq_loss: 0.00991687
+2024-12-19 12:39:47,117   Evaluation-Stage:
+aveMSE(scaled): 0.00757812, in each attr(RMSE, unscaled): {'lon': 0.1027315376890749, 'lat': 0.11956317808668857, 'alt': 0.005819670755114645, 'spdx': 0.36166654667361564, 'spdy': 0.5378782560412635, 'spdz': 0.05060861890948833}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.07643570750951767, 'lat': 0.09148474037647247, 'alt': 0.004108195658773184, 'spdx': 0.19924622774124146, 'spdy': 0.27583348751068115, 'spdz': 0.030337460339069366}
+2024-12-19 12:39:47,118   
+-------------------Epoch 12/40--------------------
+2024-12-19 12:39:47,134   0/199 train_loss(scaled): 0.00248156, temporal_loss: 0.00064576, freq_loss: 0.00248156
+2024-12-19 12:39:50,465   199/199 train_loss(scaled): 0.00106076, temporal_loss: 0.00031181, freq_loss: 0.00106076
+2024-12-19 12:39:50,466   ave_train_loss: 0.00966455, ave_temporal_loss: 0.00266484, ave_freq_loss: 0.00966455
+2024-12-19 12:39:50,617   Evaluation-Stage:
+aveMSE(scaled): 0.00730860, in each attr(RMSE, unscaled): {'lon': 0.09903531050370068, 'lat': 0.1193907956587799, 'alt': 0.004892462269925577, 'spdx': 0.35502408060148616, 'spdy': 0.5378016778543103, 'spdz': 0.049796945306724134}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.07358057796955109, 'lat': 0.08877379447221756, 'alt': 0.003248905995860696, 'spdx': 0.19562891125679016, 'spdy': 0.2691492438316345, 'spdz': 0.02962198667228222}
+2024-12-19 12:39:50,618   
+-------------------Epoch 13/40--------------------
+2024-12-19 12:39:50,634   0/199 train_loss(scaled): 0.00353690, temporal_loss: 0.00091189, freq_loss: 0.00353690
+2024-12-19 12:39:53,955   199/199 train_loss(scaled): 0.00177186, temporal_loss: 0.00046664, freq_loss: 0.00177186
+2024-12-19 12:39:53,955   ave_train_loss: 0.00941928, ave_temporal_loss: 0.00260070, ave_freq_loss: 0.00941928
+2024-12-19 12:39:54,107   Evaluation-Stage:
+aveMSE(scaled): 0.00727781, in each attr(RMSE, unscaled): {'lon': 0.09704097999248866, 'lat': 0.11499357522375539, 'alt': 0.005828331878697037, 'spdx': 0.34862598444559284, 'spdy': 0.533998085409654, 'spdz': 0.05004343608560269}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.07312043756246567, 'lat': 0.08482617139816284, 'alt': 0.004158008377999067, 'spdx': 0.1865576207637787, 'spdy': 0.2629997432231903, 'spdz': 0.02976345829665661}
+2024-12-19 12:39:54,107   
+-------------------Epoch 14/40--------------------
+2024-12-19 12:39:54,124   0/199 train_loss(scaled): 0.00280903, temporal_loss: 0.00077633, freq_loss: 0.00280903
+2024-12-19 12:39:57,447   199/199 train_loss(scaled): 0.00261187, temporal_loss: 0.00072223, freq_loss: 0.00261187
+2024-12-19 12:39:57,447   ave_train_loss: 0.00920641, ave_temporal_loss: 0.00255528, ave_freq_loss: 0.00920641
+2024-12-19 12:39:57,635   Evaluation-Stage:
+aveMSE(scaled): 0.00677746, in each attr(RMSE, unscaled): {'lon': 0.09197003184827388, 'lat': 0.10631238879792836, 'alt': 0.004860083384283624, 'spdx': 0.3448690276740105, 'spdy': 0.5270427268548856, 'spdz': 0.04908114443113316}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.06939733773469925, 'lat': 0.07837855815887451, 'alt': 0.0035939530935138464, 'spdx': 0.18867243826389313, 'spdy': 0.2557460069656372, 'spdz': 0.0290386825799942}
+2024-12-19 12:39:57,635   
+-------------------Epoch 15/40--------------------
+2024-12-19 12:39:57,655   0/199 train_loss(scaled): 0.00325206, temporal_loss: 0.00078039, freq_loss: 0.00325206
+2024-12-19 12:40:01,094   199/199 train_loss(scaled): 0.00140453, temporal_loss: 0.00042900, freq_loss: 0.00140453
+2024-12-19 12:40:01,094   ave_train_loss: 0.00892788, ave_temporal_loss: 0.00248333, ave_freq_loss: 0.00892788
+2024-12-19 12:40:01,244   Evaluation-Stage:
+aveMSE(scaled): 0.00668714, in each attr(RMSE, unscaled): {'lon': 0.08850028202178976, 'lat': 0.10140414455473427, 'alt': 0.005882660534471592, 'spdx': 0.3380873333545697, 'spdy': 0.5225585561091809, 'spdz': 0.04875660187924106}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.06688061356544495, 'lat': 0.07235999405384064, 'alt': 0.00429740222170949, 'spdx': 0.18199975788593292, 'spdy': 0.24734754860401154, 'spdz': 0.028583239763975143}
+2024-12-19 12:40:01,245   
+-------------------Epoch 16/40--------------------
+2024-12-19 12:40:01,261   0/199 train_loss(scaled): 0.00177188, temporal_loss: 0.00051038, freq_loss: 0.00177188
+2024-12-19 12:40:04,602   199/199 train_loss(scaled): 0.00204044, temporal_loss: 0.00056268, freq_loss: 0.00204044
+2024-12-19 12:40:04,602   ave_train_loss: 0.00874283, ave_temporal_loss: 0.00244190, ave_freq_loss: 0.00874283
+2024-12-19 12:40:04,761   Evaluation-Stage:
+aveMSE(scaled): 0.00669854, in each attr(RMSE, unscaled): {'lon': 0.08682625063595596, 'lat': 0.10527380835303272, 'alt': 0.005786318929411177, 'spdx': 0.33797241059047883, 'spdy': 0.5204144478204163, 'spdz': 0.04869510890946287}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.06544678658246994, 'lat': 0.07367323338985443, 'alt': 0.004100209567695856, 'spdx': 0.18189400434494019, 'spdy': 0.2455158680677414, 'spdz': 0.02887248434126377}
+2024-12-19 12:40:04,762   
+-------------------Epoch 17/40--------------------
+2024-12-19 12:40:04,778   0/199 train_loss(scaled): 0.00558490, temporal_loss: 0.00133613, freq_loss: 0.00558490
+2024-12-19 12:40:08,117   199/199 train_loss(scaled): 0.00313880, temporal_loss: 0.00106534, freq_loss: 0.00313880
+2024-12-19 12:40:08,117   ave_train_loss: 0.00863669, ave_temporal_loss: 0.00241311, ave_freq_loss: 0.00863669
+2024-12-19 12:40:08,267   Evaluation-Stage:
+aveMSE(scaled): 0.00634437, in each attr(RMSE, unscaled): {'lon': 0.08155042933980919, 'lat': 0.09532011521513394, 'alt': 0.0046990006244155514, 'spdx': 0.33407410871784643, 'spdy': 0.5243442424988066, 'spdz': 0.04853617889662455}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.061419159173965454, 'lat': 0.06796525418758392, 'alt': 0.00312047335319221, 'spdx': 0.1845463216304779, 'spdy': 0.2503001093864441, 'spdz': 0.028489552438259125}
+2024-12-19 12:40:08,268   
+-------------------Epoch 18/40--------------------
+2024-12-19 12:40:08,284   0/199 train_loss(scaled): 0.00190290, temporal_loss: 0.00053520, freq_loss: 0.00190290
+2024-12-19 12:40:11,644   199/199 train_loss(scaled): 0.00136965, temporal_loss: 0.00037471, freq_loss: 0.00136965
+2024-12-19 12:40:11,644   ave_train_loss: 0.00844768, ave_temporal_loss: 0.00237236, ave_freq_loss: 0.00844768
+2024-12-19 12:40:11,795   Evaluation-Stage:
+aveMSE(scaled): 0.00640380, in each attr(RMSE, unscaled): {'lon': 0.0792878336050535, 'lat': 0.09606537089714583, 'alt': 0.005699618574962755, 'spdx': 0.33432647406440585, 'spdy': 0.516382297070005, 'spdz': 0.04868560734679777}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05914148688316345, 'lat': 0.06433442234992981, 'alt': 0.004205641802400351, 'spdx': 0.18104614317417145, 'spdy': 0.24066542088985443, 'spdz': 0.028477337211370468}
+2024-12-19 12:40:11,795   
+-------------------Epoch 19/40--------------------
+2024-12-19 12:40:11,812   0/199 train_loss(scaled): 0.00523491, temporal_loss: 0.00127928, freq_loss: 0.00523491
+2024-12-19 12:40:15,269   199/199 train_loss(scaled): 0.00269124, temporal_loss: 0.00073150, freq_loss: 0.00269124
+2024-12-19 12:40:15,269   ave_train_loss: 0.00873224, ave_temporal_loss: 0.00243655, ave_freq_loss: 0.00873224
+2024-12-19 12:40:15,422   Evaluation-Stage:
+aveMSE(scaled): 0.00630200, in each attr(RMSE, unscaled): {'lon': 0.07637881327086772, 'lat': 0.08782124429993524, 'alt': 0.006671448294413285, 'spdx': 0.3278367729400905, 'spdy': 0.5136788371379423, 'spdz': 0.0482404583068936}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05624797195196152, 'lat': 0.054195743054151535, 'alt': 0.005224074702709913, 'spdx': 0.1796027570962906, 'spdy': 0.2383246272802353, 'spdz': 0.028057130053639412}
+2024-12-19 12:40:15,422   
+-------------------Epoch 20/40--------------------
+2024-12-19 12:40:15,439   0/199 train_loss(scaled): 0.00772536, temporal_loss: 0.00206611, freq_loss: 0.00772536
+2024-12-19 12:40:18,793   199/199 train_loss(scaled): 0.00377944, temporal_loss: 0.00139874, freq_loss: 0.00377944
+2024-12-19 12:40:18,794   ave_train_loss: 0.00810179, ave_temporal_loss: 0.00228237, ave_freq_loss: 0.00810179
+2024-12-19 12:40:18,945   Evaluation-Stage:
+aveMSE(scaled): 0.00606930, in each attr(RMSE, unscaled): {'lon': 0.0764307824391444, 'lat': 0.09021517437851372, 'alt': 0.005161276942074901, 'spdx': 0.3306093737401529, 'spdy': 0.5036412510734115, 'spdz': 0.04831564422760259}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.056913841515779495, 'lat': 0.05966506525874138, 'alt': 0.003484779503196478, 'spdx': 0.18262310326099396, 'spdy': 0.22945262491703033, 'spdz': 0.028275122866034508}
+2024-12-19 12:40:18,945   
+-------------------Epoch 21/40--------------------
+2024-12-19 12:40:18,962   0/199 train_loss(scaled): 0.00138657, temporal_loss: 0.00037971, freq_loss: 0.00138657
+2024-12-19 12:40:22,597   199/199 train_loss(scaled): 0.00060044, temporal_loss: 0.00018493, freq_loss: 0.00060044
+2024-12-19 12:40:22,598   ave_train_loss: 0.00768253, ave_temporal_loss: 0.00217530, ave_freq_loss: 0.00768253
+2024-12-19 12:40:22,750   Evaluation-Stage:
+aveMSE(scaled): 0.00597211, in each attr(RMSE, unscaled): {'lon': 0.07592350251894384, 'lat': 0.08760120901347584, 'alt': 0.004359901097653063, 'spdx': 0.3294912120033572, 'spdy': 0.510416222267217, 'spdz': 0.04816202973471703}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05573610961437225, 'lat': 0.05664181336760521, 'alt': 0.0029370810370892286, 'spdx': 0.17577391862869263, 'spdy': 0.23830561339855194, 'spdz': 0.027980616316199303}
+2024-12-19 12:40:22,750   
+-------------------Epoch 22/40--------------------
+2024-12-19 12:40:22,767   0/199 train_loss(scaled): 0.00192202, temporal_loss: 0.00048904, freq_loss: 0.00192202
+2024-12-19 12:40:26,140   199/199 train_loss(scaled): 0.00133325, temporal_loss: 0.00037738, freq_loss: 0.00133325
+2024-12-19 12:40:26,140   ave_train_loss: 0.00722648, ave_temporal_loss: 0.00205987, ave_freq_loss: 0.00722648
+2024-12-19 12:40:26,293   Evaluation-Stage:
+aveMSE(scaled): 0.00602313, in each attr(RMSE, unscaled): {'lon': 0.07508222944847634, 'lat': 0.08793540184860212, 'alt': 0.0055779963194965195, 'spdx': 0.3285339735896672, 'spdy': 0.5053827109360708, 'spdz': 0.04766126913077173}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.054893575608730316, 'lat': 0.057328835129737854, 'alt': 0.0038912983145564795, 'spdx': 0.1758652627468109, 'spdy': 0.23341001570224762, 'spdz': 0.027758518233895302}
+2024-12-19 12:40:26,294   
+-------------------Epoch 23/40--------------------
+2024-12-19 12:40:26,311   0/199 train_loss(scaled): 0.00193016, temporal_loss: 0.00048875, freq_loss: 0.00193016
+2024-12-19 12:40:29,711   199/199 train_loss(scaled): 0.00142671, temporal_loss: 0.00040943, freq_loss: 0.00142671
+2024-12-19 12:40:29,711   ave_train_loss: 0.00710202, ave_temporal_loss: 0.00201908, ave_freq_loss: 0.00710202
+2024-12-19 12:40:29,867   Evaluation-Stage:
+aveMSE(scaled): 0.00585943, in each attr(RMSE, unscaled): {'lon': 0.06881839387345265, 'lat': 0.07904767037300854, 'alt': 0.006515944854525552, 'spdx': 0.3236783130916087, 'spdy': 0.4939522365267284, 'spdz': 0.04758370615729045}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.04989083483815193, 'lat': 0.053585778921842575, 'alt': 0.005884339101612568, 'spdx': 0.1739335060119629, 'spdy': 0.22362950444221497, 'spdz': 0.027529599145054817}
+2024-12-19 12:40:29,868   
+-------------------Epoch 24/40--------------------
+2024-12-19 12:40:29,885   0/199 train_loss(scaled): 0.00253669, temporal_loss: 0.00067309, freq_loss: 0.00253669
+2024-12-19 12:40:33,279   199/199 train_loss(scaled): 0.00272805, temporal_loss: 0.00086441, freq_loss: 0.00272805
+2024-12-19 12:40:33,279   ave_train_loss: 0.00780012, ave_temporal_loss: 0.00218067, ave_freq_loss: 0.00780012
+2024-12-19 12:40:33,439   Evaluation-Stage:
+aveMSE(scaled): 0.00593640, in each attr(RMSE, unscaled): {'lon': 0.07367946426888469, 'lat': 0.08535172213663846, 'alt': 0.0051122672201221, 'spdx': 0.32750048697413575, 'spdy': 0.505960343936692, 'spdz': 0.04791114464761605}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05304526910185814, 'lat': 0.05437679588794708, 'alt': 0.003358924062922597, 'spdx': 0.17880013585090637, 'spdy': 0.23573121428489685, 'spdz': 0.027760624885559082}
+2024-12-19 12:40:33,440   
+-------------------Epoch 25/40--------------------
+2024-12-19 12:40:33,457   0/199 train_loss(scaled): 0.00137611, temporal_loss: 0.00040475, freq_loss: 0.00137611
+2024-12-19 12:40:36,842   199/199 train_loss(scaled): 0.00394215, temporal_loss: 0.00105349, freq_loss: 0.00394215
+2024-12-19 12:40:36,842   ave_train_loss: 0.00686352, ave_temporal_loss: 0.00196313, ave_freq_loss: 0.00686352
+2024-12-19 12:40:36,990   Evaluation-Stage:
+aveMSE(scaled): 0.00551564, in each attr(RMSE, unscaled): {'lon': 0.06977110623339247, 'lat': 0.07648716377925337, 'alt': 0.003898535921629046, 'spdx': 0.320250284153874, 'spdy': 0.4971160567843401, 'spdz': 0.04742548240298509}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.050008323043584824, 'lat': 0.04954932630062103, 'alt': 0.0025164245162159204, 'spdx': 0.16854162514209747, 'spdy': 0.22563782334327698, 'spdz': 0.027326690033078194}
+2024-12-19 12:40:36,990   
+-------------------Epoch 26/40--------------------
+2024-12-19 12:40:37,007   0/199 train_loss(scaled): 0.00130713, temporal_loss: 0.00037746, freq_loss: 0.00130713
+2024-12-19 12:40:40,387   199/199 train_loss(scaled): 0.00123898, temporal_loss: 0.00033183, freq_loss: 0.00123898
+2024-12-19 12:40:40,387   ave_train_loss: 0.00630145, ave_temporal_loss: 0.00181819, ave_freq_loss: 0.00630145
+2024-12-19 12:40:40,542   Evaluation-Stage:
+aveMSE(scaled): 0.00550204, in each attr(RMSE, unscaled): {'lon': 0.07008484902226057, 'lat': 0.07873881132819203, 'alt': 0.003991342012363913, 'spdx': 0.3236253547614943, 'spdy': 0.4926382755638635, 'spdz': 0.04703743179936879}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.050637561827898026, 'lat': 0.0497671514749527, 'alt': 0.0025604330003261566, 'spdx': 0.17380253970623016, 'spdy': 0.2215225100517273, 'spdz': 0.026940258219838142}
+2024-12-19 12:40:40,543   
+-------------------Epoch 27/40--------------------
+2024-12-19 12:40:40,560   0/199 train_loss(scaled): 0.00173467, temporal_loss: 0.00049361, freq_loss: 0.00173467
+2024-12-19 12:40:43,907   199/199 train_loss(scaled): 0.00188878, temporal_loss: 0.00047514, freq_loss: 0.00188878
+2024-12-19 12:40:43,907   ave_train_loss: 0.00621892, ave_temporal_loss: 0.00179434, ave_freq_loss: 0.00621892
+2024-12-19 12:40:44,056   Evaluation-Stage:
+aveMSE(scaled): 0.00550458, in each attr(RMSE, unscaled): {'lon': 0.07030509538868132, 'lat': 0.07857173508965166, 'alt': 0.004042667160124739, 'spdx': 0.3238596593690199, 'spdy': 0.4933183787416198, 'spdz': 0.0469411145303021}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05064858868718147, 'lat': 0.04980311915278435, 'alt': 0.002604132052510977, 'spdx': 0.17250606417655945, 'spdy': 0.22204412519931793, 'spdz': 0.026859696954488754}
+2024-12-19 12:40:44,057   
+-------------------Epoch 28/40--------------------
+2024-12-19 12:40:44,073   0/199 train_loss(scaled): 0.00157208, temporal_loss: 0.00044357, freq_loss: 0.00157208
+2024-12-19 12:40:47,424   199/199 train_loss(scaled): 0.00058257, temporal_loss: 0.00019550, freq_loss: 0.00058257
+2024-12-19 12:40:47,424   ave_train_loss: 0.00618646, ave_temporal_loss: 0.00178529, ave_freq_loss: 0.00618646
+2024-12-19 12:40:47,619   Evaluation-Stage:
+aveMSE(scaled): 0.00550001, in each attr(RMSE, unscaled): {'lon': 0.07032471457986074, 'lat': 0.07890590854136548, 'alt': 0.004019154928436538, 'spdx': 0.32329863087175126, 'spdy': 0.4924809322926104, 'spdz': 0.046960120104515765}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.050678398460149765, 'lat': 0.050195250660181046, 'alt': 0.0025477996096014977, 'spdx': 0.171951025724411, 'spdy': 0.22181156277656555, 'spdz': 0.026895586401224136}
+2024-12-19 12:40:47,620   
+-------------------Epoch 29/40--------------------
+2024-12-19 12:40:47,640   0/199 train_loss(scaled): 0.00154847, temporal_loss: 0.00046807, freq_loss: 0.00154847
+2024-12-19 12:40:51,131   199/199 train_loss(scaled): 0.00230326, temporal_loss: 0.00055690, freq_loss: 0.00230326
+2024-12-19 12:40:51,131   ave_train_loss: 0.00617218, ave_temporal_loss: 0.00178119, ave_freq_loss: 0.00617218
+2024-12-19 12:40:51,282   Evaluation-Stage:
+aveMSE(scaled): 0.00549992, in each attr(RMSE, unscaled): {'lon': 0.07012055941472652, 'lat': 0.07865794021005168, 'alt': 0.00403192590876873, 'spdx': 0.32355593526236476, 'spdy': 0.492948292279035, 'spdz': 0.04695161379859237}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05046694725751877, 'lat': 0.05003752559423447, 'alt': 0.0025549146812409163, 'spdx': 0.17262911796569824, 'spdy': 0.22200708091259003, 'spdz': 0.02688750997185707}
+2024-12-19 12:40:51,283   
+-------------------Epoch 30/40--------------------
+2024-12-19 12:40:51,299   0/199 train_loss(scaled): 0.07675812, temporal_loss: 0.02119527, freq_loss: 0.07675812
+2024-12-19 12:40:54,655   199/199 train_loss(scaled): 0.00129165, temporal_loss: 0.00031413, freq_loss: 0.00129165
+2024-12-19 12:40:54,655   ave_train_loss: 0.00615132, ave_temporal_loss: 0.00177551, ave_freq_loss: 0.00615132
+2024-12-19 12:40:54,807   Evaluation-Stage:
+aveMSE(scaled): 0.00551026, in each attr(RMSE, unscaled): {'lon': 0.0701224952006465, 'lat': 0.07967882214306415, 'alt': 0.004017374763090547, 'spdx': 0.3249443047741539, 'spdy': 0.4928997880244481, 'spdz': 0.04687112057050282}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.050576336681842804, 'lat': 0.050697363913059235, 'alt': 0.002513522282242775, 'spdx': 0.17369478940963745, 'spdy': 0.2222844958305359, 'spdz': 0.02684209495782852}
+2024-12-19 12:40:54,807   
+-------------------Epoch 31/40--------------------
+2024-12-19 12:40:54,824   0/199 train_loss(scaled): 0.00182632, temporal_loss: 0.00049324, freq_loss: 0.00182632
+2024-12-19 12:40:58,188   199/199 train_loss(scaled): 0.00131299, temporal_loss: 0.00044725, freq_loss: 0.00131299
+2024-12-19 12:40:58,188   ave_train_loss: 0.00613295, ave_temporal_loss: 0.00177151, ave_freq_loss: 0.00613295
+2024-12-19 12:40:58,339   Evaluation-Stage:
+aveMSE(scaled): 0.00548305, in each attr(RMSE, unscaled): {'lon': 0.0698865665495754, 'lat': 0.07822803319293162, 'alt': 0.0039596231455552924, 'spdx': 0.3231766740958763, 'spdy': 0.49306035226031847, 'spdz': 0.04693021353742256}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05033180117607117, 'lat': 0.049928322434425354, 'alt': 0.0024936276022344828, 'spdx': 0.1718284785747528, 'spdy': 0.2225191295146942, 'spdz': 0.026864642277359962}
+2024-12-19 12:40:58,339   
+-------------------Epoch 32/40--------------------
+2024-12-19 12:40:58,356   0/199 train_loss(scaled): 0.04911222, temporal_loss: 0.01585434, freq_loss: 0.04911222
+2024-12-19 12:41:01,709   199/199 train_loss(scaled): 0.00077283, temporal_loss: 0.00026270, freq_loss: 0.00077283
+2024-12-19 12:41:01,710   ave_train_loss: 0.00611340, ave_temporal_loss: 0.00176486, ave_freq_loss: 0.00611340
+2024-12-19 12:41:01,863   Evaluation-Stage:
+aveMSE(scaled): 0.00547706, in each attr(RMSE, unscaled): {'lon': 0.07000625662750405, 'lat': 0.07859664349983907, 'alt': 0.004006910732379716, 'spdx': 0.3245738394482833, 'spdy': 0.4928691322041225, 'spdz': 0.04668986247508977}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.050450023263692856, 'lat': 0.05016670003533363, 'alt': 0.00250124535523355, 'spdx': 0.1732252538204193, 'spdy': 0.222603902220726, 'spdz': 0.026712581515312195}
+2024-12-19 12:41:01,864   
+-------------------Epoch 33/40--------------------
+2024-12-19 12:41:01,881   0/199 train_loss(scaled): 0.00155315, temporal_loss: 0.00047554, freq_loss: 0.00155315
+2024-12-19 12:41:05,266   199/199 train_loss(scaled): 0.00250718, temporal_loss: 0.00065412, freq_loss: 0.00250718
+2024-12-19 12:41:05,266   ave_train_loss: 0.00610422, ave_temporal_loss: 0.00176231, ave_freq_loss: 0.00610422
+2024-12-19 12:41:05,418   Evaluation-Stage:
+aveMSE(scaled): 0.00547041, in each attr(RMSE, unscaled): {'lon': 0.06954036382351761, 'lat': 0.0780054130815555, 'alt': 0.004036419756365959, 'spdx': 0.322425398089842, 'spdy': 0.4919096904431, 'spdz': 0.04690502615716518}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05026065558195114, 'lat': 0.04921215400099754, 'alt': 0.002566067734733224, 'spdx': 0.17273402214050293, 'spdy': 0.22151978313922882, 'spdz': 0.02685007080435753}
+2024-12-19 12:41:05,419   
+-------------------Epoch 34/40--------------------
+2024-12-19 12:41:05,435   0/199 train_loss(scaled): 0.00254452, temporal_loss: 0.00077080, freq_loss: 0.00254452
+2024-12-19 12:41:08,814   199/199 train_loss(scaled): 0.00047356, temporal_loss: 0.00014907, freq_loss: 0.00047356
+2024-12-19 12:41:08,815   ave_train_loss: 0.00607457, ave_temporal_loss: 0.00175574, ave_freq_loss: 0.00607457
+2024-12-19 12:41:08,966   Evaluation-Stage:
+aveMSE(scaled): 0.00547105, in each attr(RMSE, unscaled): {'lon': 0.06963286823273471, 'lat': 0.07839457078511028, 'alt': 0.003993977562162842, 'spdx': 0.3240045621316756, 'spdy': 0.49210194949252495, 'spdz': 0.04679973838719786}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.05011111497879028, 'lat': 0.04997953772544861, 'alt': 0.002525794319808483, 'spdx': 0.17288246750831604, 'spdy': 0.22182348370552063, 'spdz': 0.02676759660243988}
+2024-12-19 12:41:08,967   
+-------------------Epoch 35/40--------------------
+2024-12-19 12:41:08,985   0/199 train_loss(scaled): 0.00185121, temporal_loss: 0.00051343, freq_loss: 0.00185121
+2024-12-19 12:41:12,381   199/199 train_loss(scaled): 0.00040257, temporal_loss: 0.00012091, freq_loss: 0.00040257
+2024-12-19 12:41:12,381   ave_train_loss: 0.00605547, ave_temporal_loss: 0.00174999, ave_freq_loss: 0.00605547
+2024-12-19 12:41:12,536   Evaluation-Stage:
+aveMSE(scaled): 0.00545640, in each attr(RMSE, unscaled): {'lon': 0.06910973575488395, 'lat': 0.07784165020212089, 'alt': 0.004023984902489974, 'spdx': 0.323420357365049, 'spdy': 0.4920032247082936, 'spdz': 0.046769607298395785}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.04962864890694618, 'lat': 0.04935541749000549, 'alt': 0.002510823542252183, 'spdx': 0.17239607870578766, 'spdy': 0.22197501361370087, 'spdz': 0.026743313297629356}
+2024-12-19 12:41:12,536   
+-------------------Epoch 36/40--------------------
+2024-12-19 12:41:12,553   0/199 train_loss(scaled): 0.00142456, temporal_loss: 0.00040007, freq_loss: 0.00142456
+2024-12-19 12:41:15,931   199/199 train_loss(scaled): 0.00129102, temporal_loss: 0.00030292, freq_loss: 0.00129102
+2024-12-19 12:41:15,932   ave_train_loss: 0.00604218, ave_temporal_loss: 0.00174587, ave_freq_loss: 0.00604218
+2024-12-19 12:41:16,100   Evaluation-Stage:
+aveMSE(scaled): 0.00543781, in each attr(RMSE, unscaled): {'lon': 0.06927346719608034, 'lat': 0.0773395784052606, 'alt': 0.003975747784432536, 'spdx': 0.32223425047766197, 'spdy': 0.4913798472190389, 'spdz': 0.046772091377535414}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.04976210370659828, 'lat': 0.04891049489378929, 'alt': 0.002523666014894843, 'spdx': 0.17179198563098907, 'spdy': 0.221055805683136, 'spdz': 0.026748744770884514}
+2024-12-19 12:41:16,101   
+-------------------Epoch 37/40--------------------
+2024-12-19 12:41:16,119   0/199 train_loss(scaled): 0.00307082, temporal_loss: 0.00110028, freq_loss: 0.00307082
+2024-12-19 12:41:19,479   199/199 train_loss(scaled): 0.00214094, temporal_loss: 0.00054530, freq_loss: 0.00214094
+2024-12-19 12:41:19,479   ave_train_loss: 0.00602522, ave_temporal_loss: 0.00174169, ave_freq_loss: 0.00602522
+2024-12-19 12:41:19,630   Evaluation-Stage:
+aveMSE(scaled): 0.00541300, in each attr(RMSE, unscaled): {'lon': 0.06925110261087516, 'lat': 0.0769947791280278, 'alt': 0.0038738942151869847, 'spdx': 0.3223489480239758, 'spdy': 0.49062825523803, 'spdz': 0.046704703176066405}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.04979497194290161, 'lat': 0.04865036904811859, 'alt': 0.002447201171889901, 'spdx': 0.17152082920074463, 'spdy': 0.2208556979894638, 'spdz': 0.026709040626883507}
+2024-12-19 12:41:19,630   
+-------------------Epoch 38/40--------------------
+2024-12-19 12:41:19,649   0/199 train_loss(scaled): 0.00366281, temporal_loss: 0.00105348, freq_loss: 0.00366281
+2024-12-19 12:41:23,151   199/199 train_loss(scaled): 0.00228205, temporal_loss: 0.00068969, freq_loss: 0.00228205
+2024-12-19 12:41:23,152   ave_train_loss: 0.00600646, ave_temporal_loss: 0.00173786, ave_freq_loss: 0.00600646
+2024-12-19 12:41:23,303   Evaluation-Stage:
+aveMSE(scaled): 0.00541820, in each attr(RMSE, unscaled): {'lon': 0.06882894884086248, 'lat': 0.07710080849486309, 'alt': 0.0040368442409408995, 'spdx': 0.32295091765273815, 'spdy': 0.4905617065666276, 'spdz': 0.046595247760937646}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.04925466328859329, 'lat': 0.048180289566516876, 'alt': 0.0025949478149414062, 'spdx': 0.1715892106294632, 'spdy': 0.21964143216609955, 'spdz': 0.026644179597496986}
+2024-12-19 12:41:23,303   
+-------------------Epoch 39/40--------------------
+2024-12-19 12:41:23,320   0/199 train_loss(scaled): 0.00153220, temporal_loss: 0.00041928, freq_loss: 0.00153220
+2024-12-19 12:41:26,726   199/199 train_loss(scaled): 0.00095578, temporal_loss: 0.00028832, freq_loss: 0.00095578
+2024-12-19 12:41:26,726   ave_train_loss: 0.00597596, ave_temporal_loss: 0.00172879, ave_freq_loss: 0.00597596
+2024-12-19 12:41:26,876   Evaluation-Stage:
+aveMSE(scaled): 0.00544800, in each attr(RMSE, unscaled): {'lon': 0.0691600974189618, 'lat': 0.07708038878079213, 'alt': 0.004092851965944346, 'spdx': 0.3234117184374869, 'spdy': 0.49037258130191036, 'spdz': 0.046850786810002515}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.049826398491859436, 'lat': 0.048446349799633026, 'alt': 0.0025502052158117294, 'spdx': 0.17231331765651703, 'spdy': 0.22011491656303406, 'spdz': 0.02679641731083393}
+2024-12-19 12:41:26,876   
+-------------------Epoch 40/40--------------------
+2024-12-19 12:41:26,893   0/199 train_loss(scaled): 0.00476040, temporal_loss: 0.00109762, freq_loss: 0.00476040
+2024-12-19 12:41:30,251   199/199 train_loss(scaled): 0.00183489, temporal_loss: 0.00053677, freq_loss: 0.00183489
+2024-12-19 12:41:30,251   ave_train_loss: 0.00596322, ave_temporal_loss: 0.00172567, ave_freq_loss: 0.00596322
+2024-12-19 12:41:30,411   Evaluation-Stage:
+aveMSE(scaled): 0.00541462, in each attr(RMSE, unscaled): {'lon': 0.06844751261926303, 'lat': 0.07713127247070728, 'alt': 0.003912692001432465, 'spdx': 0.3226500559066802, 'spdy': 0.49220686072160447, 'spdz': 0.0465906179259352}
+aveMAE(scaled): None, in each attr(MAE, unscaled): {'lon': 0.04902759566903114, 'lat': 0.04818618297576904, 'alt': 0.002461993368342519, 'spdx': 0.1716925948858261, 'spdy': 0.22244834899902344, 'spdz': 0.026608306914567947}
+2024-12-19 12:41:30,411   
+
+
+
+
+
+
+
+
+
+------------End of the training epoch-------------

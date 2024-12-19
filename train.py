@@ -60,7 +60,7 @@ class Train:
         self.MSE = torch.nn.MSELoss(reduction='mean')
         self.MAE = torch.nn.L1Loss(reduction='mean')
         self.optimizer = torch.optim.Adam(self.net.parameters(), lr=self.opt.lr)
-        self.opt_lr_scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.5)
+        self.opt_lr_scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=25, gamma=0.05)
         if not self.opt.nologging:
             self.log_path = self.opt.logdir + f'/{datetime.datetime.now().strftime("%y-%m-%d")}'
             if self.opt.debug:
@@ -153,9 +153,15 @@ class Train:
             print_str = f'train_loss(scaled): {loss_backward.item():.8f}, temporal_loss: {train_temporal_loss.item():.8f}, ' \
                         f'freq_loss: {train_wt_loss.item():.8f}'
             progress_bar(i, batchs_len, print_str, start_time)
-            record_freq = 20
-            if not self.opt.nologging and (i % ((batchs_len - 1) // record_freq) == 0 or i == batchs_len - 1):
+
+            record_freq = 1
+            if batchs_len > 1 and not self.opt.nologging and (i % ((batchs_len - 1) // record_freq) == 0 or i == batchs_len - 1):
                 logging.debug(f'{i}/{batchs_len - 1} ' + print_str)
+
+            # TODO: error comented
+            # record_freq = 20
+            # if not self.opt.nologging and (i % ((batchs_len - 1) // record_freq) == 0 or i == batchs_len - 1):
+            #     logging.debug(f'{i}/{batchs_len - 1} ' + print_str)
         print_str = f'ave_train_loss: {np.mean(train_loss_set):.8f}, ave_temporal_loss: {np.mean(temporal_loss_set):.8f}' \
                     + f', ave_freq_loss: {np.mean(freq_loss_set):.8f}'
         print(print_str)
@@ -273,9 +279,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--minibatch_len', default=10, type=int)
     parser.add_argument('--interval', default=1, type=int)
-    parser.add_argument('--batch_size', default=2048, type=int)
-    parser.add_argument('--epoch', default=150, type=int)
-    parser.add_argument('--lr', default=0.001, type=float)
+    parser.add_argument('--batch_size', default=2024, type=int)
+    parser.add_argument('--epoch', default=300, type=int)
+    parser.add_argument('--lr', default=0.0005, type=float)
     parser.add_argument('--dpot', default=0.0, type=float)
     parser.add_argument('--cpu', action='store_true')
     parser.add_argument('--nologging', action='store_true')
@@ -283,12 +289,10 @@ if __name__ == '__main__':
     parser.add_argument('--datadir', default='./data', type=str)
     parser.add_argument('--bidirectional', action='store_true')
     parser.add_argument('--saving_model_num', default=0, type=int)
-    parser.add_argument('--debug', action='store_true',
-                        help='logs saving in an independent dir and 10 models being saved')
+    parser.add_argument('--debug', action='store_true', help='logs saving in an independent dir and 10 models being saved')
     parser.add_argument('--maxlevel', default=1, type=int)
     parser.add_argument('--wavelet', default='haar', type=str)
-    parser.add_argument('--L2details', action='store_true',
-                        help='L2 regularization for detail coefficients to avoid them to converge to zeros')
+    parser.add_argument('--L2details', action='store_true', help='L2 regularization for detail coefficients to avoid them to converge to zeros')
     parser.add_argument('--wt_mode', default='symmetric', type=str)
     parser.add_argument('--w_spatial', default='0.0', type=float)
     parser.add_argument('--w_lo', default='1.0', type=float)
