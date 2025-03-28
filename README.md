@@ -1,6 +1,6 @@
 # Drone Pose Prediction in Laboratory Environment
 
-This project is based on the paper "Flight trajectory prediction enabled by time-frequency wavelet transform" by Zhang et al. The repository has been adapted as a final project for the Skoltech course "Theoretical Methods of Deep Learning." It focuses on predicting drone poses in a laboratory environment. All necessary scripts for data analysis and plotting are included.
+This project is based on the paper "Flight trajectory prediction enabled by time-frequency wavelet transform" by Zhang et al. The repository has been adapted as a final project for the course "Theoretical Methods of Deep Learning." It focuses on predicting drone poses in a laboratory environment. All necessary scripts for data analysis and plotting are included.
 
 <p  align="middle"><img src="pics/traj_plots.png"  width="95%"/></p>
 
